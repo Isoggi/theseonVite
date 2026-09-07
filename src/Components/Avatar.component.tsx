@@ -1,5 +1,4 @@
 import { Avatar } from "@fluentui/react-components";
-import { GuestRegular } from "@fluentui/react-icons";
 
 type Props = {
   name?: string;
@@ -15,6 +14,6 @@ export function AvatarComponent({ name, image }: Props) {
       }}
     />
   ) : (
-    <Avatar icon={<GuestRegular />} aria-label="Guest" />
+    <Avatar aria-label="Guest" />
   );
 }

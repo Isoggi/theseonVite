@@ -1,7 +1,25 @@
-import { Text, Stack } from "@fluentui/react";
+import {
+  makeStyles,
+  Title1,
+} from "@fluentui/react-components";
 import CardComponent from "../Components/Card.component";
 
+const useStyles = makeStyles({
+  page: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    padding: "20px",
+  },
+  articles: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  },
+});
+
 const Articles = () => {
+  const styles = useStyles();
   const articles = [
     {
       title: "Understanding React Hooks",
@@ -18,9 +36,9 @@ const Articles = () => {
   ];
 
   return (
-    <Stack tokens={{ childrenGap: 20 }} styles={{ root: { padding: 20 } }}>
-      <Text variant="xxLarge">My Articles</Text>
-      <Stack tokens={{ childrenGap: 20 }}>
+    <div className={styles.page}>
+      <Title1>My Articles</Title1>
+      <div className={styles.articles}>
         {articles.map((article, index) => (
           <CardComponent
             key={index}
@@ -28,8 +46,8 @@ const Articles = () => {
             description={article.description}
           />
         ))}
-      </Stack>
-    </Stack>
+      </div>
+    </div>
   );
 };
 

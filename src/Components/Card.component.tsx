@@ -1,9 +1,4 @@
 import {
-  ArrowReplyRegular,
-  NewsRegular,
-  ShareRegular,
-} from "@fluentui/react-icons";
-import {
   Card,
   CardFooter,
   CardHeader,
@@ -60,7 +55,7 @@ export default function CardComponent({
           body ? (
             <img src={resolveAsset("placeholder.jpg")} alt="Body" />
           ) : (
-            <Avatar icon={<NewsRegular />} aria-label="Document" />
+            <Avatar aria-label="Document" />
           )
         }
       >
@@ -72,8 +67,8 @@ export default function CardComponent({
       </CardPreview>
 
       <CardFooter>
-        <Button icon={<ArrowReplyRegular fontSize={16} />}>Reply</Button>
-        <Button icon={<ShareRegular fontSize={16} />}>Share</Button>
+        <Button>Reply</Button>
+        <Button>Share</Button>
       </CardFooter>
     </Card>
   );
