@@ -5,11 +5,16 @@ import Articles from "./Pages/Articles";
 import Portfolio from "./Pages/Portfolio";
 import Navbar from "./Components/Navbar.component";
 
-function App() {
+type AppProps = {
+  themeMode: "light" | "dark";
+  onThemeToggle: () => void;
+};
+
+function App({ themeMode, onThemeToggle }: AppProps) {
   return (
     <BrowserRouter>
       <div className="app">
-        <Navbar />
+        <Navbar themeMode={themeMode} onThemeToggle={onThemeToggle} />
         <main className="page-content">
           <Routes>
             <Route path="/" element={<Home />} />

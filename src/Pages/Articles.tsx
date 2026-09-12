@@ -1,8 +1,6 @@
-import {
-  makeStyles,
-  Title1,
-} from "@fluentui/react-components";
+import { makeStyles, Title1 } from "@fluentui/react-components";
 import CardComponent from "../Components/Card.component";
+import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
 
 const useStyles = makeStyles({
   page: {
@@ -19,6 +17,7 @@ const useStyles = makeStyles({
 });
 
 const Articles = () => {
+  useDocumentMeta("Articles - theseOn");
   const styles = useStyles();
   const articles = [
     {

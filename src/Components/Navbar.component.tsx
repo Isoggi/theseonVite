@@ -2,13 +2,15 @@ import {
   Link,
   makeStyles,
   Subtitle1,
+  Switch,
+  tokens,
 } from "@fluentui/react-components";
 
 const useStyles = makeStyles({
   navbar: {
     alignItems: "center",
-    backgroundColor: "#0078d4",
-    color: "white",
+    backgroundColor: tokens.colorBrandBackground,
+    color: tokens.colorNeutralForegroundOnBrand,
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
@@ -17,7 +19,7 @@ const useStyles = makeStyles({
     width: "100%",
   },
   brand: {
-    color: "white",
+    color: tokens.colorNeutralForegroundOnBrand,
   },
   links: {
     alignItems: "center",
@@ -27,11 +29,15 @@ const useStyles = makeStyles({
     rowGap: "8px",
   },
   link: {
-    color: "white",
+    color: tokens.colorNeutralForegroundOnBrand,
   },
 });
+type NavbarProps = {
+  themeMode: "light" | "dark";
+  onThemeToggle: () => void;
+};
 
-const Navbar = () => {
+const Navbar = ({ themeMode, onThemeToggle }: NavbarProps) => {
   const styles = useStyles();
 
   return (
@@ -47,6 +53,16 @@ const Navbar = () => {
         <Link className={styles.link} href="/portfolio">
           Portfolio
         </Link>
+        <Link className={styles.link} href="/about">
+          About
+        </Link>
+        <Switch
+          label={themeMode === "dark" ? "🌙" : "☀️"}
+          onClick={onThemeToggle}
+          checked={themeMode === "dark"}
+          aria-checked={themeMode === "dark"}
+          aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} theme`}
+        />
       </div>
     </nav>
   );
