@@ -1,11 +1,8 @@
 import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { LandingCarousel } from "./Home/LandingCarousel";
 
-type Props = {
-  theme?: string;
-};
-
-export default function Home({ theme }: Props): React.JSX.Element {
+export default function Home(): React.JSX.Element {
   useDocumentMeta("theseOn");
 
-  return <div>Home {theme ? `: ${theme}` : ""}</div>;
+  return <LandingCarousel />;
 }
