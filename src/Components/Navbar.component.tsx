@@ -12,6 +12,7 @@ import {
   NavDrawerBody,
   NavItem,
 } from "@fluentui/react-nav";
+import { NavbarProps } from "../Types";
 import * as React from "react";
 
 const useStyles = makeStyles({
@@ -51,10 +52,15 @@ const useStyles = makeStyles({
     },
   },
   drawer: {
-    backgroundColor: tokens.colorNeutralBackground1,
+    backgroundColor: tokens.colorNeutralBackground3,
   },
   drawerThemeSwitch: {
+    textAlign: "end",
     padding: tokens.spacingVerticalM,
+  },
+  drawerNavItem: {
+    textAlign: "end",
+    color: tokens.colorNeutralForeground1,
   },
 });
 
@@ -64,11 +70,6 @@ const navigationItems = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/about", label: "About" },
 ];
-
-type NavbarProps = {
-  themeMode: "light" | "dark";
-  onThemeToggle: () => void;
-};
 
 const Navbar = ({ themeMode, onThemeToggle }: NavbarProps) => {
   const styles = useStyles();
@@ -114,13 +115,14 @@ const Navbar = ({ themeMode, onThemeToggle }: NavbarProps) => {
         onClick={() => setIsDrawerOpen(true)}
       />
       <NavDrawer
+        position="end"
         className={styles.drawer}
         open={isDrawerOpen}
         onOpenChange={(_, data) => setIsDrawerOpen(data.open)}
         type="overlay"
       >
         <NavDrawerBody className={styles.drawerThemeSwitch}>
-          <div className={styles.drawerThemeSwitch}>
+          <div className={styles.drawerNavItem}>
             <Switch
               label={themeMode === "dark" ? "🌙 Dark mode" : "☀️ Light mode"}
               onClick={onThemeToggle}
@@ -130,7 +132,12 @@ const Navbar = ({ themeMode, onThemeToggle }: NavbarProps) => {
           </div>
           <Nav aria-label="Mobile navigation">
             {navigationItems.map((item) => (
-              <NavItem href={item.href} key={item.href} value={item.href}>
+              <NavItem
+                className={styles.drawerNavItem}
+                href={item.href}
+                key={item.href}
+                value={item.href}
+              >
                 {item.label}
               </NavItem>
             ))}

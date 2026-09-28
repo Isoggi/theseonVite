@@ -1,7 +1,7 @@
 import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
 import { LandingCarousel } from "./Home/LandingCarousel";
 
-export default function Home(): React.JSX.Element {
+export default function Home() {
   useDocumentMeta("theseOn");
 
   return <LandingCarousel />;

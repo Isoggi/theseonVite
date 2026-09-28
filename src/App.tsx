@@ -3,6 +3,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Articles from "./Pages/Articles";
 import Portfolio from "./Pages/Portfolio";
+import About from "./Pages/About";
 import Navbar from "./Components/Navbar.component";
 
 type AppProps = {
@@ -20,6 +21,7 @@ function App({ themeMode, onThemeToggle }: AppProps) {
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
       </div>

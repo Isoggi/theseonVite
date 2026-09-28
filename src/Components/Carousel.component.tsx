@@ -1,4 +1,5 @@
 import { Button, makeStyles, tokens } from "@fluentui/react-components";
+import { CarouselProps } from "../Types/ComponentProps.type";
 import * as React from "react";
 
 const useStyles = makeStyles({
@@ -39,20 +40,6 @@ const useStyles = makeStyles({
     fontSize: tokens.fontSizeBase200,
   },
 });
-
-export type CarouselProps = {
-  children: React.ReactNode;
-  /** The index of the first slide shown. */
-  initialIndex?: number;
-  /** Automatically advance slides at this interval, in milliseconds. */
-  autoPlayInterval?: number;
-  /** Continue at the first slide after reaching the last slide. */
-  loop?: boolean;
-  /** Accessible name for the carousel region. */
-  ariaLabel?: string;
-  className?: string;
-  onSlideChange?: (index: number) => void;
-};
 
 function getValidIndex(index: number, slideCount: number): number {
   return Math.min(Math.max(index, 0), Math.max(slideCount - 1, 0));
