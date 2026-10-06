@@ -1,4 +1,4 @@
-import { Carousel } from "../../Components/Carousel.component";
+import { Carousel } from "../../Components";
 
 const slides = [
   "Welcome to theseOn",

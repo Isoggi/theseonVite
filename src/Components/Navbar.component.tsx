@@ -12,7 +12,7 @@ import {
   NavDrawerBody,
   NavItem,
 } from "@fluentui/react-nav";
-import { NavbarProps } from "../Types";
+import { AppThemeProps } from "../Types";
 import * as React from "react";
 
 const useStyles = makeStyles({
@@ -71,7 +71,7 @@ const navigationItems = [
   { href: "/about", label: "About" },
 ];
 
-const Navbar = ({ themeMode, onThemeToggle }: NavbarProps) => {
+const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
   const styles = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
 

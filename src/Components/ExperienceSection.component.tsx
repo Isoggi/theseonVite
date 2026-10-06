@@ -1,7 +1,9 @@
 import { IExperience } from "../Interfaces";
 
-const ExperienceSection: React.FC<{ experienceData: IExperience[] }> = ({
+const ExperienceSection = ({
   experienceData,
+}: {
+  experienceData: IExperience[];
 }) => {
   return (
     <section className="max-w-4xl mx-auto p-6 font-sans">

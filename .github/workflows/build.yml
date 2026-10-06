@@ -1,0 +1,44 @@
+name: Build and Deploy to Nginx
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: [self-hosted, windows]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify Node.js Environment
+        run: |
+          node -v
+          npm -v
+
+      - name: Install Project Dependencies
+        run: npm ci
+
+      - name: Build Application Production Assets
+        run: npm run build
+
+      # New deployment step leveraging local Windows pathing
+      # Vite projects output to 'dist/' by default
+      # This clears the Nginx directory and copies over the fresh production build
+      - name: Deploy Assets to Nginx Root
+        shell: powershell
+        run: |
+          $targetPath = "C:\www\frontend"
+
+          # 1. Clear out old files safely to prevent mixing old and new assets
+          if (Test-Path $targetPath) {
+              Remove-Item -Path "$targetPath\*" -Recurforce -Force -ErrorAction SilentlyContinue
+          } else {
+              New-Item -ItemType Directory -Force -Path $targetPath
+          }
+
+          # 2. Copy the fresh build items from the pipeline workspace into Nginx
+          Copy-Item -Path "dist\*" -Destination $targetPath -Recurse -Force

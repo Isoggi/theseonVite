@@ -4,14 +4,10 @@ import Home from "./Pages/Home";
 import Articles from "./Pages/Articles";
 import Portfolio from "./Pages/Portfolio";
 import About from "./Pages/About";
-import Navbar from "./Components/Navbar.component";
+import { Navbar } from "./Components";
+import { AppThemeProps } from "./Types";
 
-type AppProps = {
-  themeMode: "light" | "dark";
-  onThemeToggle: () => void;
-};
-
-function App({ themeMode, onThemeToggle }: AppProps) {
+function App({ themeMode, onThemeToggle }: AppThemeProps) {
   return (
     <BrowserRouter>
       <div className="app">

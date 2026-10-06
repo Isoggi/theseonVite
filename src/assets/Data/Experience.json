@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1",
+    "role": "Senior Web Developer",
+    "company": "NawaData",
+    "type": "Contract",
+    "duration": "Sep 2025 - Mar 2026 · 7 mos",
+    "location": "Jakarta, Indonesia",
+    "workModel": "On-site",
+    "skills": ["Visual Basic .NET (VB.NET)", "Microsoft SQL Server", "+1 skill"]
+  },
+  {
+    "id": "2",
+    "role": "Career break",
+    "company": "Layoff/position eliminated",
+    "type": "Career break",
+    "duration": "Aug 2023 - Mar 2025 · 1 yr 8 mos",
+    "location": "Kota Tangerang, Banten, Indonesia",
+    "description": "After my previous role, I took on freelance projects where I worked on developing WordPress page, web maintenance, and helping projects for small clients. In the meantime, I’ve been staying up to date on the latest industry practices, attending webinars, enrolling in web development bootcamp, and working on personal development projects to ensure I remain technically proficient."
+  },
+  {
+    "id": "3",
+    "role": ".NET Developer",
+    "company": "Tele-centre Services Pte Ltd",
+    "type": "Contract",
+    "duration": "Feb 2023 - Jul 2023 · 6 mos",
+    "location": "Singapore",
+    "workModel": "Remote",
+    "description": "Developed web-based Customer Service forms and applications to streamline business operations. Designed and implemented centralized landing page, with single sign-on for clients. Collaborated with teams to deliver functional enhancements based on Agile methodologies. Utilized ASP.NET Core alongside ASP.NET Framework, Web Form, and SQL Server for development.",
+    "skills": ["ASP.NET MVC", "Microsoft SQL Server", "+10 skills"]
+  },
+  {
+    "id": "4",
+    "role": "Full-stack Developer",
+    "company": "Synergy Financial Advisers Pte Ltd",
+    "type": "Contract",
+    "duration": "Nov 2020 - Nov 2022 · 2 yrs 1 mo",
+    "location": "Batam, Riau Islands, Indonesia",
+    "workModel": "Hybrid",
+    "description": "Working under Glints as a Full-Stack .NET Developer on the internal website.",
+    "skills": ["ASP.NET MVC", "Microsoft SQL Server", "+10 skills"]
+  },
+  {
+    "id": "5",
+    "role": "Full-stack Developer",
+    "company": "PT Xsis Mitra Utama",
+    "type": "Contract",
+    "duration": "Dec 2017 - Sep 2020 · 2 yrs 10 mos",
+    "location": "South Jakarta, Jakarta, Indonesia",
+    "workModel": "Hybrid",
+    "description": "Working with an internal team of XMU for Employee Self-service modules.",
+    "skills": ["ASP.NET MVC", "ASP.NET Web API", "+10 skills"]
+  }
+]
