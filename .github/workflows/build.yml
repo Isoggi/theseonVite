@@ -20,7 +20,7 @@ jobs:
           npm -v
 
       - name: Install Project Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build Application Production Assets
         run: npm run build
@@ -35,7 +35,7 @@ jobs:
 
           # 1. Clear out old files safely to prevent mixing old and new assets
           if (Test-Path $targetPath) {
-              Remove-Item -Path "$targetPath\*" -Recurforce -Force -ErrorAction SilentlyContinue
+              Remove-Item -Path "$targetPath\*" -Recurse -Force -ErrorAction SilentlyContinue
           } else {
               New-Item -ItemType Directory -Force -Path $targetPath
           }
