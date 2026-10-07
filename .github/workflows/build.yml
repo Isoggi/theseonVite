@@ -35,10 +35,15 @@ jobs:
 
           # 1. Clear out old files safely to prevent mixing old and new assets
           if (Test-Path $targetPath) {
-              Remove-Item -Path "$targetPath\*" -Recurse -Force -ErrorAction SilentlyContinue
+              Remove-Item -Path "$targetPath\*" -Recurse -Force -ErrorAction Stop 
           } else {
               New-Item -ItemType Directory -Force -Path $targetPath
           }
+          # 2. Stop Nginx service to avoid file locks during copy
+          Stop-Service -Name "Nginx" -Force -ErrorAction Stop
 
-          # 2. Copy the fresh build items from the pipeline workspace into Nginx
+          # 3. Copy the fresh build items from the pipeline workspace into Nginx
           Copy-Item -Path "dist\*" -Destination $targetPath -Recurse -Force
+
+          # 4. Start Nginx service to serve the updated assets
+          Start-Service -Name "Nginx" -ErrorAction Stop
