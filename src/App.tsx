@@ -4,7 +4,8 @@ import Home from "./Pages/Home";
 import Articles from "./Pages/Articles";
 import Portfolio from "./Pages/Portfolio";
 import About from "./Pages/About";
-import { Navbar } from "./Components";
+import Privacy from "./Pages/Privacy";
+import { Footer, Navbar } from "./Components";
 import { AppThemeProps } from "./Types";
 
 function App({ themeMode, onThemeToggle }: AppThemeProps) {
@@ -18,8 +19,10 @@ function App({ themeMode, onThemeToggle }: AppThemeProps) {
             <Route path="/articles" element={<Articles />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
+            <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </BrowserRouter>
   );

@@ -14,6 +14,7 @@ import {
 } from "@fluentui/react-nav";
 import { AppThemeProps } from "../Types";
 import * as React from "react";
+import { SearchBar } from "./";
 
 const useStyles = makeStyles({
   navbar: {
@@ -24,8 +25,11 @@ const useStyles = makeStyles({
     flexWrap: "wrap",
     justifyContent: "space-between",
     padding: "10px clamp(12px, 4vw, 32px)",
+    position: "sticky",
     rowGap: "8px",
+    top: 0,
     width: "100%",
+    zIndex: 1000,
   },
   brand: {
     color: tokens.colorNeutralForegroundOnBrand,
@@ -45,7 +49,10 @@ const useStyles = makeStyles({
     color: tokens.colorNeutralForegroundOnBrand,
   },
   mobileMenu: {
+    alignItems: "end",
     display: "none",
+    gap: "8px",
+    justifyContent: "end",
     marginLeft: "auto",
     "@media (max-width: 600px)": {
       display: "block",
@@ -79,6 +86,9 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
     <nav className={styles.navbar}>
       <Subtitle1 className={styles.brand}>theseOn</Subtitle1>
       <div className={styles.desktopNav}>
+        <SearchBar onSearch={() => {}} />
+      </div>
+      <div className={styles.desktopNav}>
         {navigationItems.map((item) => (
           <Link
             className={styles.navItem}
@@ -109,11 +119,14 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
           aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} theme`}
         />
       </div>
-      <Hamburger
-        className={styles.mobileMenu}
-        aria-label="Open navigation menu"
-        onClick={() => setIsDrawerOpen(true)}
-      />
+      <div className={styles.mobileMenu}>
+        <SearchBar onSearch={() => {}} startAsButton={true} />
+        <Hamburger
+          aria-label="Open navigation menu"
+          onClick={() => setIsDrawerOpen(true)}
+        />
+      </div>
+
       <NavDrawer
         position="end"
         className={styles.drawer}
