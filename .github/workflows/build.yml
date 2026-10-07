@@ -19,7 +19,12 @@ jobs:
           node -v
           npm -v
 
-      - name: Install Project Dependencies
+      - name: Install dependencies (with lockfile)
+        if: hashFiles('**/package-lock.json') != ''
+        run: npm ci
+
+      - name: Install dependencies (without lockfile)
+        if: hashFiles('**/package-lock.json') == ''
         run: npm install
 
       - name: Build Application Production Assets
@@ -33,15 +38,15 @@ jobs:
         run: |
           $targetPath = "C:\www\frontend"
 
-          # 1. Clear out old files safely to prevent mixing old and new assets
+          # 1. Stop Nginx service to avoid file locks during copy
+          Stop-Service -Name "Nginx" -Force -ErrorAction Stop
+
+          # 2. Clear out old files safely to prevent mixing old and new assets
           if (Test-Path $targetPath) {
               Remove-Item -Path "$targetPath\*" -Recurse -Force -ErrorAction Stop 
           } else {
               New-Item -ItemType Directory -Force -Path $targetPath
           }
-          # 2. Stop Nginx service to avoid file locks during copy
-          Stop-Service -Name "Nginx" -Force -ErrorAction Stop
-
           # 3. Copy the fresh build items from the pipeline workspace into Nginx
           Copy-Item -Path "dist\*" -Destination $targetPath -Recurse -Force
 
