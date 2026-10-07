@@ -39,7 +39,8 @@ jobs:
           $targetPath = "C:\www\frontend"
 
           # 1. Stop Nginx service to avoid file locks during copy
-          Stop-Service -Name "Nginx" -Force -ErrorAction Stop
+          & nssm stop "Nginx"
+          if ($LASTEXITCODE -ne 0) { throw "NSSM failed to stop the service." }
 
           # 2. Clear out old files safely to prevent mixing old and new assets
           if (Test-Path $targetPath) {
@@ -51,4 +52,5 @@ jobs:
           Copy-Item -Path "dist\*" -Destination $targetPath -Recurse -Force
 
           # 4. Start Nginx service to serve the updated assets
-          Start-Service -Name "Nginx" -ErrorAction Stop
+          & nssm start "Nginx"
+          if ($LASTEXITCODE -ne 0) { throw "NSSM failed to start the service." }
