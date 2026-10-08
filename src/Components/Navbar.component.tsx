@@ -25,8 +25,8 @@ const useStyles = makeStyles({
     backgroundColor: tokens.colorBrandBackground,
     color: tokens.colorNeutralForegroundOnBrand,
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexWrap: "nowrap",
+    gap: "clamp(12px, 2vw, 24px)",
     padding: "10px clamp(12px, 4vw, 32px)",
     position: "sticky",
     rowGap: "8px",
@@ -35,16 +35,60 @@ const useStyles = makeStyles({
     zIndex: 1000,
   },
   brand: {
+    alignItems: "center",
     color: tokens.colorNeutralForegroundOnBrand,
+    display: "flex",
+    flex: "0 0 40px",
+    height: "40px",
+    overflow: "hidden",
+    position: "relative",
     textDecorationLine: "none",
+    transition: "flex-basis 250ms ease",
+    width: "40px",
+    ":hover": {
+      flexBasis: "120px",
+      textDecorationLine: "none",
+      "& .brandIcon": {
+        opacity: 0,
+        transform: "scale(0.8)",
+      },
+      "& .brandText": {
+        opacity: 1,
+        transform: "translateX(0)",
+      },
+    },
+    ":focus-visible": {
+      flexBasis: "120px",
+      outline: `2px solid ${tokens.colorNeutralForegroundOnBrand}`,
+      outlineOffset: "2px",
+      "& .brandIcon": {
+        opacity: 0,
+        transform: "scale(0.8)",
+      },
+      "& .brandText": {
+        opacity: 1,
+        transform: "translateX(0)",
+      },
+    },
+  },
+  desktopSearch: {
+    alignItems: "center",
+    display: "flex",
+    flex: "1 1 0",
+    justifyContent: "center",
+    minWidth: 0,
+    "@media (max-width: 600px)": {
+      display: "none",
+    },
   },
   desktopNav: {
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
+    flexShrink: 0,
     gap: "20px",
     rowGap: "8px",
-    // marginLeft: "auto",
+    justifyContent: "flex-end",
     "@media (max-width: 600px)": {
       display: "none",
     },
@@ -98,6 +142,32 @@ const useStyles = makeStyles({
   drawerNav: {
     width: "100%",
   },
+  iconWrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "40px",
+    left: 0,
+    opacity: 1,
+    position: "absolute",
+    top: 0,
+    transition: "opacity 200ms ease, transform 200ms ease",
+    transform: "scale(1)",
+    width: "40px",
+  },
+  textWrapper: {
+    color: tokens.colorNeutralForegroundOnBrand,
+    opacity: 0,
+    left: "40px",
+    position: "absolute",
+    top: 0,
+    whiteSpace: "nowrap",
+    transition: "opacity 200ms ease, transform 200ms ease",
+    transform: "translateX(-6px)",
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+  },
 });
 
 const navigationItems = [
@@ -110,9 +180,28 @@ const navigationItems = [
 const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
   const styles = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [isSearchCompact, setIsSearchCompact] = React.useState(false);
+  const searchSlotRef = React.useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname.replace(/\/+$/, "") || "/";
+
+  React.useEffect(() => {
+    const searchSlot = searchSlotRef.current;
+    if (!searchSlot) {
+      return;
+    }
+
+    const updateSearchMode = () => {
+      setIsSearchCompact(searchSlot.clientWidth < 320);
+    };
+    const observer = new ResizeObserver(updateSearchMode);
+    observer.observe(searchSlot);
+    updateSearchMode();
+
+    return () => observer.disconnect();
+  }, []);
+
   const themeLabel = (
     <span className={styles.themeLabel}>
       {themeMode === "dark" ? (
@@ -120,7 +209,7 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
       ) : (
         <WeatherSunnyRegular aria-hidden="true" />
       )}
-      {themeMode === "dark" ? "Dark mode" : "Light mode"}
+      {/* {themeMode === "dark" ? "Dark mode" : "Light mode"} */}
     </span>
   );
 
@@ -155,10 +244,24 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
         href="/"
         onClick={(event) => handleRouteClick(event, "/")}
       >
-        <Subtitle1>theseOn</Subtitle1>
+        <div className={`brandIcon ${styles.iconWrapper}`}>
+          <img
+            src="/theseon.Logo.svg"
+            alt=""
+            style={{
+              width: 40,
+              height: 40,
+              objectFit: "contain",
+            }}
+          />
+        </div>
+
+        <div className={`brandText ${styles.textWrapper}`}>
+          <Subtitle1>theseOn</Subtitle1>
+        </div>
       </Link>
-      <div className={styles.desktopNav}>
-        <SearchBar onSearch={() => {}} />
+      <div className={styles.desktopSearch} ref={searchSlotRef}>
+        <SearchBar onSearch={() => {}} startAsButton={isSearchCompact} />
       </div>
       <div className={styles.desktopNav}>
         {navigationItems.map((item) => (
@@ -219,9 +322,7 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
               <NavItem
                 href={item.href}
                 key={item.href}
-                onClick={(event) =>
-                  handleRouteClick(event, item.href, true)
-                }
+                onClick={(event) => handleRouteClick(event, item.href, true)}
                 value={item.href}
               >
                 {item.label}

@@ -60,10 +60,7 @@ export function Carousel({
   const slides = React.useMemo(() => {
     if (items && items.length > 0) {
       return items.map((item) => (
-        <div
-          key={item.id}
-          style={{ width: "100%", boxSizing: "border-box" }}
-        >
+        <div key={item.id} style={{ width: "100%", boxSizing: "border-box" }}>
           <div
             style={{
               backgroundImage: item.backgroundImage
@@ -89,6 +86,9 @@ export function Carousel({
             >
               {item.title && (
                 <h2 style={{ margin: 0, marginBottom: 8 }}>{item.title}</h2>
+              )}
+              {item.description && (
+                <p style={{ margin: 0, marginBottom: 8 }}>{item.description}</p>
               )}
               {item.data && <div>{item.data}</div>}
             </div>
