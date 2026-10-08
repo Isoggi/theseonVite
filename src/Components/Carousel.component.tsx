@@ -47,6 +47,7 @@ function getValidIndex(index: number, slideCount: number): number {
 
 export function Carousel({
   children,
+  items,
   initialIndex = 0,
   autoPlayInterval,
   loop = true,
@@ -55,7 +56,50 @@ export function Carousel({
   onSlideChange,
 }: CarouselProps): React.JSX.Element {
   const classes = useStyles();
-  const slides = React.Children.toArray(children);
+
+  const slides = React.useMemo(() => {
+    if (items && items.length > 0) {
+      return items.map((item) => (
+        <div
+          key={item.id}
+          style={{ width: "100%", boxSizing: "border-box" }}
+        >
+          <div
+            style={{
+              backgroundImage: item.backgroundImage
+                ? `url(${item.backgroundImage})`
+                : undefined,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              minHeight: 240,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                background: "rgba(0,0,0,0.35)",
+                color: "#fff",
+                padding: 16,
+                borderRadius: 8,
+                maxWidth: "90%",
+                textAlign: "center",
+              }}
+            >
+              {item.title && (
+                <h2 style={{ margin: 0, marginBottom: 8 }}>{item.title}</h2>
+              )}
+              {item.data && <div>{item.data}</div>}
+            </div>
+          </div>
+        </div>
+      ));
+    }
+
+    return React.Children.toArray(children);
+  }, [children, items]);
+
   const [activeIndex, setActiveIndex] = React.useState(() =>
     getValidIndex(initialIndex, slides.length),
   );

@@ -16,26 +16,27 @@ const useStyles = makeStyles({
   },
 });
 
+const articles = [
+  {
+    title: "Understanding React Hooks",
+    description: "A deep dive into React hooks.",
+  },
+  {
+    title: "Fluent UI for React Developers",
+    description: "How to use Fluent UI in your React apps.",
+  },
+  {
+    title: "Building a Portfolio with Vite",
+    description: "Learn how to build fast web apps with Vite.",
+  },
+];
+
 const Articles = () => {
   useDocumentMeta("Articles | theseOn", {
     description:
       "Read articles and notes from theseOn on React, Fluent UI, web development, and building modern web applications.",
   });
   const styles = useStyles();
-  const articles = [
-    {
-      title: "Understanding React Hooks",
-      description: "A deep dive into React hooks.",
-    },
-    {
-      title: "Fluent UI for React Developers",
-      description: "How to use Fluent UI in your React apps.",
-    },
-    {
-      title: "Building a Portfolio with Vite",
-      description: "Learn how to build fast web apps with Vite.",
-    },
-  ];
 
   return (
     <div className={styles.page}>
