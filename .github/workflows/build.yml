@@ -23,6 +23,10 @@ jobs:
           node -v
           npm -v
 
+      - name: Install dependencies (with lockfile)
+        if: hashFiles('**/package-lock.json') != ''
+        run: npm ci --ignore-scripts --prefer-offline
+
       - name: Install dependencies (without lockfile)
         if: hashFiles('**/package-lock.json') == ''
         run: npm install
