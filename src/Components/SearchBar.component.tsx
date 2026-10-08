@@ -1,10 +1,11 @@
 import {
+  Button,
   mergeClasses,
   makeStyles,
   SearchBox,
 } from "@fluentui/react-components";
 import { SearchRegular } from "@fluentui/react-icons";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
@@ -21,18 +22,22 @@ const useStyles = makeStyles({
     maxWidth: "100%",
     width: "480px",
   },
+  mobileForm: {
+    flex: "0 1 40px",
+    minWidth: "40px",
+    overflow: "hidden",
+    transition: "flex-basis 0.2s ease-in-out",
+  },
+  mobileFormExpanded: {
+    flexBasis: "min(280px, calc(100vw - 160px))",
+  },
   input: {
     flexGrow: 1,
     minWidth: 0,
   },
-  searchBoxButton: {
-    transitionProperty: "width",
-    transitionDuration: "0.3s",
-    transitionTimingFunction: "ease-in-out",
-    width: "80px", // Default collapsed width
-  },
-  searchBoxButtonExpanded: {
-    width: "400px", // Expanded width when focused
+  searchButton: {
+    minWidth: "40px",
+    width: "40px",
   },
 });
 
@@ -44,28 +49,54 @@ export default function SearchBar({
 }: SearchBarProps) {
   const styles = useStyles();
   const [query, setQuery] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isExpanded) {
+      searchInputRef.current?.focus();
+    }
+  }, [isExpanded]);
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearch(query.trim());
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} role="search">
+    <form
+      className={mergeClasses(
+        styles.form,
+        startAsButton && styles.mobileForm,
+        isExpanded && startAsButton && styles.mobileFormExpanded,
+      )}
+      onSubmit={handleSubmit}
+      role="search"
+    >
       {startAsButton ? (
-        <SearchBox
-          aria-label={ariaLabel}
-          className={mergeClasses(
-            styles.searchBoxButton,
-            isFocused && styles.searchBoxButtonExpanded,
+        <>
+          {isExpanded ? (
+            <SearchBox
+              ref={searchInputRef}
+              aria-label={ariaLabel}
+              className={styles.input}
+              contentBefore={<SearchRegular />}
+              onBlur={() => setIsExpanded(false)}
+              onChange={(_, data) => setQuery(data.value)}
+              placeholder={placeholder}
+              value={query}
+            />
+          ) : (
+            <Button
+              aria-label={ariaLabel}
+              appearance="subtle"
+              className={styles.searchButton}
+              icon={<SearchRegular />}
+              onClick={() => setIsExpanded(true)}
+              type="button"
+            />
           )}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          contentBefore={<SearchRegular />}
-          onChange={(_, data) => setQuery(data.value)}
-          placeholder={placeholder}
-          value={query}
-        />
+        </>
       ) : (
         <SearchBox
           aria-label={ariaLabel}

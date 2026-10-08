@@ -49,13 +49,14 @@ const useStyles = makeStyles({
     color: tokens.colorNeutralForegroundOnBrand,
   },
   mobileMenu: {
-    alignItems: "end",
+    alignItems: "center",
     display: "none",
+    flexShrink: 0,
     gap: "8px",
-    justifyContent: "end",
+    justifyContent: "flex-end",
     marginLeft: "auto",
     "@media (max-width: 600px)": {
-      display: "block",
+      display: "flex",
     },
   },
   drawer: {
