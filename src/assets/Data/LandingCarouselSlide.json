@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "image": "/placeholder.jpg",
+    "title": "Welcome to theseOn",
+    "description": "Discover. Ask. Learn. Connect. Welcome to a community of like-minded individuals."
+  },
+  {
+    "id": 2,
+    "image": "/placeholder.jpg",
+    "title": "Explore our latest articles",
+    "description": "Stay updated with the latest industry insights and news."
+  },
+  {
+    "id": 3,
+    "image": "/placeholder.jpg",
+    "title": "View our portfolio",
+    "description": "See how we've helped businesses like yours achieve their goals."
+  }
+]
