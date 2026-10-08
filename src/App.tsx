@@ -5,6 +5,7 @@ import Articles from "./Pages/Articles";
 import Portfolio from "./Pages/Portfolio";
 import About from "./Pages/About";
 import Privacy from "./Pages/Privacy";
+import NotFound from "./Pages/NotFound";
 import { Footer, Navbar } from "./Components";
 import { AppThemeProps } from "./Types";
 
@@ -20,6 +21,7 @@ function App({ themeMode, onThemeToggle }: AppThemeProps) {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

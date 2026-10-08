@@ -1,6 +1,7 @@
 import {
   Link,
   makeStyles,
+  mergeClasses,
   Subtitle1,
   Switch,
   tokens,
@@ -12,8 +13,10 @@ import {
   NavDrawerBody,
   NavItem,
 } from "@fluentui/react-nav";
+import { WeatherMoonRegular, WeatherSunnyRegular } from "@fluentui/react-icons";
 import { AppThemeProps } from "../Types";
 import * as React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchBar } from "./";
 
 const useStyles = makeStyles({
@@ -33,6 +36,7 @@ const useStyles = makeStyles({
   },
   brand: {
     color: tokens.colorNeutralForegroundOnBrand,
+    textDecorationLine: "none",
   },
   desktopNav: {
     alignItems: "center",
@@ -48,6 +52,11 @@ const useStyles = makeStyles({
   navItem: {
     color: tokens.colorNeutralForegroundOnBrand,
   },
+  activeNavItem: {
+    fontWeight: tokens.fontWeightSemibold,
+    textDecorationLine: "underline",
+    textUnderlineOffset: "5px",
+  },
   mobileMenu: {
     alignItems: "center",
     display: "none",
@@ -60,15 +69,34 @@ const useStyles = makeStyles({
     },
   },
   drawer: {
-    backgroundColor: tokens.colorNeutralBackground3,
+    backgroundColor: tokens.colorNeutralBackground1,
+  },
+  drawerBody: {
+    display: "flex",
+    flexDirection: "column",
+    gap: tokens.spacingVerticalL,
+    padding: tokens.spacingVerticalL,
   },
   drawerThemeSwitch: {
-    textAlign: "end",
-    padding: tokens.spacingVerticalM,
+    alignItems: "center",
+    backgroundColor: tokens.colorNeutralBackground2,
+    border: `1px solid ${tokens.colorNeutralStroke2}`,
+    borderRadius: tokens.borderRadiusMedium,
+    display: "flex",
+    minHeight: "56px",
+    padding: `0 ${tokens.spacingHorizontalM}`,
   },
-  drawerNavItem: {
-    textAlign: "end",
-    color: tokens.colorNeutralForeground1,
+  themeSwitch: {
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  themeLabel: {
+    alignItems: "center",
+    columnGap: tokens.spacingHorizontalS,
+    display: "inline-flex",
+  },
+  drawerNav: {
+    width: "100%",
   },
 });
 
@@ -82,42 +110,78 @@ const navigationItems = [
 const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
   const styles = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname.replace(/\/+$/, "") || "/";
+  const themeLabel = (
+    <span className={styles.themeLabel}>
+      {themeMode === "dark" ? (
+        <WeatherMoonRegular aria-hidden="true" />
+      ) : (
+        <WeatherSunnyRegular aria-hidden="true" />
+      )}
+      {themeMode === "dark" ? "Dark mode" : "Light mode"}
+    </span>
+  );
+
+  const handleRouteClick = (
+    event: React.MouseEvent<HTMLElement>,
+    href: string,
+    closeDrawer = false,
+  ) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    navigate(href);
+    if (closeDrawer) {
+      setIsDrawerOpen(false);
+    }
+  };
 
   return (
     <nav className={styles.navbar}>
-      <Subtitle1 className={styles.brand}>theseOn</Subtitle1>
+      <Link
+        aria-label="theseOn home"
+        className={styles.brand}
+        href="/"
+        onClick={(event) => handleRouteClick(event, "/")}
+      >
+        <Subtitle1>theseOn</Subtitle1>
+      </Link>
       <div className={styles.desktopNav}>
         <SearchBar onSearch={() => {}} />
       </div>
       <div className={styles.desktopNav}>
         {navigationItems.map((item) => (
           <Link
-            className={styles.navItem}
+            aria-current={currentPath === item.href ? "page" : undefined}
+            className={mergeClasses(
+              styles.navItem,
+              currentPath === item.href && styles.activeNavItem,
+            )}
             href={item.href}
             key={item.href}
+            onClick={(event) => handleRouteClick(event, item.href)}
             value={item.href}
           >
             {item.label}
           </Link>
         ))}
-        {/* <Link className={styles.desktopNav} href="/">
-          Home
-        </Link>
-        <Link className={styles.desktopNav} href="/articles">
-          Articles
-        </Link>
-        <Link className={styles.desktopNav} href="/portfolio">
-          Portfolio
-        </Link>
-        <Link className={styles.desktopNav} href="/about">
-          About
-        </Link> */}
         <Switch
-          label={themeMode === "dark" ? "🌙" : "☀️"}
+          label={themeLabel}
+          labelPosition="before"
           onClick={onThemeToggle}
           checked={themeMode === "dark"}
-          aria-checked={themeMode === "dark"}
-          aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} theme`}
+          aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
         />
       </div>
       <div className={styles.mobileMenu}>
@@ -135,21 +199,29 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
         onOpenChange={(_, data) => setIsDrawerOpen(data.open)}
         type="overlay"
       >
-        <NavDrawerBody className={styles.drawerThemeSwitch}>
-          <div className={styles.drawerNavItem}>
+        <NavDrawerBody className={styles.drawerBody}>
+          <div className={styles.drawerThemeSwitch}>
             <Switch
-              label={themeMode === "dark" ? "🌙 Dark mode" : "☀️ Light mode"}
+              className={styles.themeSwitch}
+              label={themeLabel}
+              labelPosition="before"
               onClick={onThemeToggle}
               checked={themeMode === "dark"}
-              aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} theme`}
+              aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
             />
           </div>
-          <Nav aria-label="Mobile navigation">
+          <Nav
+            aria-label="Mobile navigation"
+            className={styles.drawerNav}
+            selectedValue={currentPath}
+          >
             {navigationItems.map((item) => (
               <NavItem
-                className={styles.drawerNavItem}
                 href={item.href}
                 key={item.href}
+                onClick={(event) =>
+                  handleRouteClick(event, item.href, true)
+                }
                 value={item.href}
               >
                 {item.label}
