@@ -12,14 +12,16 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v7
 
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: "npm" # Automates caching for global npm directory (~/.npm)
+
       - name: Verify Node.js Environment
         run: |
           node -v
           npm -v
-
-      - name: Install dependencies (with lockfile)
-        if: hashFiles('**/package-lock.json') != ''
-        run: npm ci
 
       - name: Install dependencies (without lockfile)
         if: hashFiles('**/package-lock.json') == ''
