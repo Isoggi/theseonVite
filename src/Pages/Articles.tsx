@@ -17,7 +17,10 @@ const useStyles = makeStyles({
 });
 
 const Articles = () => {
-  useDocumentMeta("Articles - theseOn");
+  useDocumentMeta("Articles | theseOn", {
+    description:
+      "Read articles and notes from theseOn on React, Fluent UI, web development, and building modern web applications.",
+  });
   const styles = useStyles();
   const articles = [
     {
@@ -36,7 +39,7 @@ const Articles = () => {
 
   return (
     <div className={styles.page}>
-      <Title1>My Articles</Title1>
+      <Title1 as="h1">My Articles</Title1>
       <div className={styles.articles}>
         {articles.map((article, index) => (
           <CardComponent

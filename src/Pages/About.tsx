@@ -13,12 +13,15 @@ const useStyles = makeStyles({
 });
 
 export default function About() {
-  useDocumentMeta("About - theseOn");
+  useDocumentMeta("About | theseOn", {
+    description:
+      "Learn about theseOn, a personal portfolio and writing space sharing professional experience, selected projects, and technology articles.",
+  });
   const styles = useStyles();
 
   return (
     <article className={styles.page}>
-      <Title1>About theseOn</Title1>
+      <Title1 as="h1">About theseOn</Title1>
       <section className={styles.section}>
         <Text as="p" block>
           theseOn is a personal portfolio and writing space for sharing

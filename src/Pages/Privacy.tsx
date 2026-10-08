@@ -1,4 +1,5 @@
 import {
+  Link,
   makeStyles,
   Text,
   Title1,
@@ -6,7 +7,6 @@ import {
   tokens,
 } from "@fluentui/react-components";
 import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   page: {
@@ -26,12 +26,15 @@ const useStyles = makeStyles({
 });
 
 export default function Privacy() {
-  useDocumentMeta("Privacy policy - theseOn");
+  useDocumentMeta("Privacy policy | theseOn", {
+    description:
+      "Read the theseOn privacy policy, including information about personal data, cookies, and your rights under the GDPR.",
+  });
   const styles = useStyles();
 
   return (
     <article className={styles.page}>
-      <Title1>Privacy policy</Title1>
+      <Title1 as="h1">Privacy policy</Title1>
       <Text as="p" block>
         Last updated: 7 October 2026
       </Text>
@@ -52,7 +55,7 @@ export default function Privacy() {
         </Text>
         <Text as="p" block className={styles.notice}>
           Privacy contact: [Kristanto Saptadi Nugraha. Mail:{" "}
-          <Link to="mailto:kristantonugraha@theseon.my.id">
+          <Link href="mailto:kristantonugraha@theseon.my.id">
             kristantonugraha@theseon.my.id
           </Link>
           ]
