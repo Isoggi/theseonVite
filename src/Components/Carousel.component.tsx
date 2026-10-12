@@ -1,4 +1,5 @@
 import { Button, makeStyles, tokens } from "@fluentui/react-components";
+import { ArrowNextRegular, ArrowPreviousRegular } from "@fluentui/react-icons";
 import { CarouselProps } from "../Types/ComponentProps.type";
 import * as React from "react";
 
@@ -35,6 +36,9 @@ const useStyles = makeStyles({
   indicator: {
     minWidth: "32px",
   },
+  iconIndicator: {
+    minWidth: "32px",
+  },
   status: {
     color: tokens.colorNeutralForeground2,
     fontSize: tokens.fontSizeBase200,
@@ -54,6 +58,9 @@ export function Carousel({
   ariaLabel = "Carousel",
   className,
   onSlideChange,
+  showControls = true,
+  showIconControls = false,
+  showControlsMeta = true,
 }: CarouselProps): React.JSX.Element {
   const classes = useStyles();
 
@@ -176,40 +183,62 @@ export function Carousel({
         </div>
       </div>
 
-      <div className={classes.controls}>
-        <Button
-          aria-label="Previous slide"
-          disabled={!loop && isFirstSlide}
-          onClick={() => goToSlide(activeIndex - 1)}
-        >
-          Previous
-        </Button>
-        <div className={classes.indicators} role="tablist" aria-label="Slides">
-          {slides.map((_, index) => (
-            <Button
-              appearance={index === activeIndex ? "primary" : "subtle"}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-selected={index === activeIndex}
-              className={classes.indicator}
-              key={index}
-              onClick={() => goToSlide(index)}
-              role="tab"
-            >
-              {index + 1}
-            </Button>
-          ))}
+      {showControls && (
+        <div className={classes.controls}>
+          <Button
+            aria-label="Previous slide"
+            disabled={!loop && isFirstSlide}
+            shape={showIconControls ? "circular" : undefined}
+            icon={showIconControls ? <ArrowPreviousRegular /> : undefined}
+            onClick={() => goToSlide(activeIndex - 1)}
+            className={
+              showIconControls ? classes.iconIndicator : classes.indicator
+            }
+          >
+            {!showIconControls && "Previous"}
+          </Button>
+          <div
+            className={classes.indicators}
+            role="tablist"
+            aria-label="Slides"
+          >
+            {slides.map((_, index) => (
+              <Button
+                appearance={index === activeIndex ? "primary" : "subtle"}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-selected={index === activeIndex}
+                className={
+                  showIconControls ? classes.iconIndicator : classes.indicator
+                }
+                shape={showIconControls ? "circular" : undefined}
+                icon={showIconControls ? <span /> : undefined}
+                key={index}
+                onClick={() => goToSlide(index)}
+                role="tab"
+              >
+                {!showIconControls && index + 1}
+              </Button>
+            ))}
+          </div>
+          <Button
+            aria-label="Next slide"
+            disabled={!loop && isLastSlide}
+            onClick={() => goToSlide(activeIndex + 1)}
+            shape={showIconControls ? "circular" : undefined}
+            icon={showIconControls ? <ArrowNextRegular /> : undefined}
+            className={
+              showIconControls ? classes.iconIndicator : classes.indicator
+            }
+          >
+            {!showIconControls && "Next"}
+          </Button>
         </div>
-        <Button
-          aria-label="Next slide"
-          disabled={!loop && isLastSlide}
-          onClick={() => goToSlide(activeIndex + 1)}
-        >
-          Next
-        </Button>
-      </div>
-      <div className={classes.status} aria-live="polite">
-        Slide {activeIndex + 1} of {slides.length}
-      </div>
+      )}
+      {showControlsMeta && (
+        <div className={classes.status} aria-live="polite">
+          Slide {activeIndex + 1} of {slides.length}
+        </div>
+      )}
     </section>
   );
 }

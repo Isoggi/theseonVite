@@ -1,5 +1,4 @@
-![theseonLogo](public/theseon.Logo.svg)
-# theseOn
+# <img src="public/theseon.Logo.svg" alt="theseOn wordmark logo with a dark geometric emblem above the text on a plain background. The emblem is a stylized black and off white abstract mark, and the word theseOn appears in bold dark lettering. Clean, modern, professional brand styling with a minimal background and a polished visual tone." width="40">theseOn
 
 A personal portfolio and writing site built with React, TypeScript, Vite, and Fluent UI v9.
 
@@ -26,12 +25,12 @@ Vite prints the local development URL in the terminal.
 
 ## Scripts
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Type-check and create a production build in `dist/` |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run ESLint |
+| Command           | Purpose                                             |
+| ----------------- | --------------------------------------------------- |
+| `npm run dev`     | Start the Vite development server                   |
+| `npm run build`   | Type-check and create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally                |
+| `npm run lint`    | Run ESLint                                          |
 
 ## Project structure
 
