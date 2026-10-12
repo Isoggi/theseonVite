@@ -1,4 +1,7 @@
 import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { CertificateSection } from "../Components";
+import { ICertificate } from "../Interfaces";
+import certificateData from "../assets/Data/Certificates.json";
 import { Text, Title1 } from "@fluentui/react-components";
 
 type Props = { urls?: string[] };
@@ -18,6 +21,7 @@ export default function Portfolio({ urls }: Props) {
           </Text>
         ))}
       </div>
+      <CertificateSection certificates={certificateData as ICertificate[]} />
     </div>
   );
 }

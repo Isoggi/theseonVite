@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+![theseonLogo](public/theseon.Logo.svg)
+# theseOn
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal portfolio and writing site built with React, TypeScript, Vite, and Fluent UI v9.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsive navigation with mobile drawer, search, and light/dark theme toggle.
+- Home page with a featured-content carousel and professional experience timeline.
+- Portfolio page with a JSON-backed certificate grid.
+- Article listing and detail pages at `/articles/{id}/{article-title}`.
+- About and GDPR-oriented privacy pages.
+- Route-aware page metadata, canonical URLs, and structured data.
+- Reusable Fluent UI components for cards, navigation, search, carousel, and sections.
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Requirements: Node.js and npm.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Vite prints the local development URL in the terminal.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Scripts
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check and create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+
+## Project structure
+
+```text
+src/
+  Components/       Shared UI components
+  Hooks/            Theme and document metadata hooks
+  Interfaces/       TypeScript data interfaces
+  Pages/            Route-level pages
+  Utils/            Shared utilities, including article slug generation
+  assets/Data/      JSON content for articles, experience, carousel, and certificates
 ```
+
+## Content
+
+- Edit `src/assets/Data/Articles.json` to add or update articles. Each article uses an `id`, `title`, and `description`; `content`, `author`, `date`, `image`, and `tags` are optional.
+- Edit `src/assets/Data/Experience.json` to update the home page experience timeline.
+- Edit `src/assets/Data/LandingCarouselSlide.json` to change featured carousel slides.
+- Add certificate entries to `src/assets/Data/Certificates.json` (`id`, `title`, and `issuer` are required; credential details and image are optional).
+
+Article card links derive their readable URL segment from each article title. The article ID identifies the content when the title slug changes.

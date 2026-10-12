@@ -2,6 +2,7 @@ import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Articles from "./Pages/Articles";
+import ArticleDetail from "./Pages/ArticleDetail";
 import Portfolio from "./Pages/Portfolio";
 import About from "./Pages/About";
 import Privacy from "./Pages/Privacy";
@@ -18,6 +19,7 @@ function App({ themeMode, onThemeToggle }: AppThemeProps) {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:id/:title?" element={<ArticleDetail />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
