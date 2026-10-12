@@ -26,4 +26,7 @@ export type CarouselProps = {
   ariaLabel?: string;
   className?: string;
   onSlideChange?: (index: number) => void;
+  showControls?: boolean;
+  showIconControls?: boolean;
+  showControlsMeta?: boolean;
 };

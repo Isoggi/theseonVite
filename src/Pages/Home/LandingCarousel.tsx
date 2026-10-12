@@ -20,6 +20,9 @@ export function LandingCarousel(): React.JSX.Element {
       loop={true}
       className="landing-carousel"
       onSlideChange={(index) => console.log("Slide changed to:", index)}
+      showControls={true}
+      showIconControls={true}
+      showControlsMeta={false}
     >
       {/* {data.map((slide) => (
         <div key={slide.id}>

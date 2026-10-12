@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "title": "Understanding React Hooks",
+    "description": "A deep dive into React hooks, how they work under the hood, and best practices for modern state management.",
+    "date": "Oct 5, 2026",
+    "author": "theseOn",
+    "tags": ["React", "JavaScript", "Frontend"],
+    "content": "React Hooks revolutionized how we build components in React by allowing functional components to manage state and side effects without writing class components. Introduced in React 16.8, hooks provide a direct API to React concepts like state, lifecycle, context, and refs.\n\nIn this article, we explore the core hooks including useState, useEffect, useMemo, and useCallback. We'll also cover best practices for writing clean custom hooks and optimizing component renders."
+  },
+  {
+    "id": "2",
+    "title": "Fluent UI for React Developers",
+    "description": "How to use Fluent UI v9 in your React apps to build accessible and modern user interfaces.",
+    "date": "Oct 1, 2026",
+    "author": "theseOn",
+    "tags": ["Fluent UI", "React", "Design System"],
+    "content": "Fluent UI v9 is Microsoft's component library built from the ground up for modern web standards. It brings CSS-in-JS powered by Griffel (makeStyles), flexible design tokens, dark mode support, and built-in accessibility features.\n\nIn this guide, we walk through setting up FluentProvider, customizing design tokens, building responsive navigation components, and applying dark/light theme switching easily in React applications."
+  },
+  {
+    "id": "3",
+    "title": "Building a Portfolio with Vite",
+    "description": "Learn how to build fast web apps with Vite, React, TypeScript, and modern SEO optimizations.",
+    "date": "Sep 20, 2026",
+    "author": "theseOn",
+    "tags": ["Vite", "TypeScript", "SEO", "Portfolio"],
+    "content": "Vite delivers an insanely fast development environment with instant Server Start and lightning fast HMR (Hot Module Replacement). Combined with React and TypeScript, it forms an ideal stack for modern personal portfolio sites.\n\nWe discuss setting up client-side routing with React Router, managing document metadata dynamically for search engines, and structuring modular component design for long-term scalability."
+  }
+]

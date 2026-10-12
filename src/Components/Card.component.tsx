@@ -4,30 +4,42 @@ import {
   CardHeader,
   CardPreview,
   makeStyles,
+  mergeClasses,
   Body1,
   Caption1,
   Button,
-  Avatar,
+  tokens,
 } from "@fluentui/react-components";
 import { AvatarComponent } from "./Avatar.component";
+import * as React from "react";
+import type { ReactNode } from "react";
+
 type Props = {
   title?: string;
   description?: string;
   image?: string;
-  body?: string;
-};
-
-const resolveAsset = (asset: string) => {
-  const ASSET_URL = "/";
-
-  return `${ASSET_URL}${asset}`;
+  body?: ReactNode;
+  /** Custom footer content; pass null to hide the footer. */
+  footer?: ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 const useStyles = makeStyles({
   card: {
     margin: "auto",
-    width: "min(720px, 100%)",
+    width: "100%",
     maxWidth: "100%",
+    height: "100%",
+  },
+  clickableCard: {
+    cursor: "pointer",
+    transitionDuration: "200ms",
+    transitionProperty: "transform, box-shadow",
+    transitionTimingFunction: "ease-in-out",
+    ":hover": {
+      transform: "translateY(-2px)",
+      boxShadow: tokens.shadow8,
+    },
   },
 });
 
@@ -36,10 +48,20 @@ export default function CardComponent({
   description,
   image,
   body,
+  footer,
+  onClick,
 }: Props) {
   const styles = useStyles();
+
+  const handleFooterButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Card className={styles.card}>
+    <Card
+      className={mergeClasses(styles.card, onClick && styles.clickableCard)}
+      onClick={onClick}
+    >
       <CardHeader
         image={<AvatarComponent name={title} image={image} />}
         header={
@@ -50,26 +72,22 @@ export default function CardComponent({
         description={<Caption1>{description}</Caption1>}
       />
 
-      <CardPreview
-        logo={
-          body ? (
-            <img src={resolveAsset("placeholder.jpg")} alt="Body" />
-          ) : (
-            <Avatar aria-label="Document" />
-          )
-        }
-      >
-        {body ? (
+      {body && (
+        <CardPreview>
           <div>{body}</div>
-        ) : (
-          <img src={resolveAsset("placeholder.jpg")} alt="Preview of body" />
-        )}
-      </CardPreview>
+        </CardPreview>
+      )}
 
-      <CardFooter>
-        <Button>Reply</Button>
-        <Button>Share</Button>
-      </CardFooter>
+      {footer !== null && (
+        <CardFooter onClick={handleFooterButtonClick}>
+          {footer ?? (
+            <>
+              <Button onClick={handleFooterButtonClick}>Reply</Button>
+              <Button onClick={handleFooterButtonClick}>Share</Button>
+            </>
+          )}
+        </CardFooter>
+      )}
     </Card>
   );
 }

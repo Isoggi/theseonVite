@@ -1,6 +1,7 @@
 export * from "./Avatar.component";
 export * from "./Card.component";
 export * from "./Carousel.component";
+export { default as CertificateSection } from "./CertificateSection.component";
 export * from "./Container.component";
 export * from "./ErrorInfo.component";
 export { default as ExperienceSection } from "./ExperienceSection.component";
