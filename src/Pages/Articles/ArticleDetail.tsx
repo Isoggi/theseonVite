@@ -8,9 +8,9 @@ import {
 } from "@fluentui/react-components";
 import { ArrowLeftRegular } from "@fluentui/react-icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
-import { IArticle } from "../Interfaces";
-import articlesData from "../assets/Data/Articles.json";
+import { useDocumentMeta } from "../../Hooks/useDocumentMetadata";
+import { IArticle } from "../../Interfaces";
+import articlesData from "../../assets/Data/Articles.json";
 
 const useStyles = makeStyles({
   page: {

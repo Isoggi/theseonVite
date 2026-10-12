@@ -30,3 +30,8 @@ export type CarouselProps = {
   showIconControls?: boolean;
   showControlsMeta?: boolean;
 };
+
+export type AvatarComponentProps = {
+  name?: string;
+  image?: string;
+};

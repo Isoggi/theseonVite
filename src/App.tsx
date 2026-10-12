@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Articles from "./Pages/Articles";
-import ArticleDetail from "./Pages/ArticleDetail";
+import ArticleDetail from "./Pages/Articles/ArticleDetail";
 import Portfolio from "./Pages/Portfolio";
 import About from "./Pages/About";
 import Privacy from "./Pages/Privacy";
@@ -26,7 +26,7 @@ function App({ themeMode, onThemeToggle }: AppThemeProps) {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
-        <Footer />
+        <Footer themeMode={themeMode} />
       </div>
     </BrowserRouter>
   );
