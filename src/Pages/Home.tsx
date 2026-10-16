@@ -1,4 +1,4 @@
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 import { LandingExperience } from "./Home/LandingExperience";
 import { LandingCarousel } from "./Home/LandingCarousel";
 import {

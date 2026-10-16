@@ -1,3 +1,6 @@
+import { ReactNode } from "react";
+import { ICertificate } from "../Interfaces";
+
 export type CarouselItem = {
   /** Unique identifier for the slide */
   id: string;
@@ -34,4 +37,18 @@ export type CarouselProps = {
 export type AvatarComponentProps = {
   name?: string;
   image?: string;
+};
+
+export type CertificateSectionProps = {
+  certificates: ICertificate[];
+};
+
+export type CardProps = {
+  title?: string;
+  description?: string;
+  image?: string;
+  body?: ReactNode;
+  /** Custom footer content; pass null to hide the footer. */
+  footer?: ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 };

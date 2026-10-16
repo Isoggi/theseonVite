@@ -5,7 +5,7 @@ import {
   Title2,
   tokens,
 } from "@fluentui/react-components";
-import { ICertificate } from "../Interfaces";
+import { CertificateSectionProps } from "../Types";
 import CardComponent from "./Card.component";
 
 const useStyles = makeStyles({
@@ -29,10 +29,6 @@ const useStyles = makeStyles({
     gap: tokens.spacingVerticalXS,
   },
 });
-
-type CertificateSectionProps = {
-  certificates: ICertificate[];
-};
 
 export default function CertificateSection({
   certificates,

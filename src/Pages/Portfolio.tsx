@@ -1,4 +1,4 @@
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 import { CertificateSection } from "../Components";
 import { ICertificate } from "../Interfaces";
 import certificateData from "../assets/Data/Certificates.json";

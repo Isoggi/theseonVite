@@ -6,7 +6,7 @@ import {
   Title2,
   tokens,
 } from "@fluentui/react-components";
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 
 const useStyles = makeStyles({
   page: {

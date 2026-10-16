@@ -12,17 +12,7 @@ import {
 } from "@fluentui/react-components";
 import { AvatarComponent } from "./Avatar.component";
 import * as React from "react";
-import type { ReactNode } from "react";
-
-type Props = {
-  title?: string;
-  description?: string;
-  image?: string;
-  body?: ReactNode;
-  /** Custom footer content; pass null to hide the footer. */
-  footer?: ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
-};
+import { CardProps } from "../Types";
 
 const useStyles = makeStyles({
   card: {
@@ -50,7 +40,7 @@ export default function CardComponent({
   body,
   footer,
   onClick,
-}: Props) {
+}: CardProps) {
   const styles = useStyles();
 
   const handleFooterButtonClick = (e: React.MouseEvent) => {

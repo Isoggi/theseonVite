@@ -8,7 +8,7 @@ import {
 } from "@fluentui/react-components";
 import { ArrowLeftRegular } from "@fluentui/react-icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDocumentMeta } from "../../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../../Hooks";
 import { IArticle } from "../../Interfaces";
 import articlesData from "../../assets/Data/Articles.json";
 
@@ -82,7 +82,7 @@ export default function ArticleDetail() {
   }
 
   return (
-    <article className={styles.page}>
+    <div className={styles.page}>
       <Button
         icon={<ArrowLeftRegular />}
         appearance="subtle"
@@ -91,29 +91,30 @@ export default function ArticleDetail() {
       >
         Back to Articles
       </Button>
-
-      <header className={styles.header}>
-        <Title1 as="h1">{article.title}</Title1>
-        <div className={styles.meta}>
-          {article.author && <Text size={300}>By {article.author}</Text>}
-          {article.date && <Text size={300}>• {article.date}</Text>}
-        </div>
-        {article.tags && article.tags.length > 0 && (
-          <div className={styles.tags}>
-            {article.tags.map((tag) => (
-              <Badge key={tag} appearance="tint" color="brand">
-                {tag}
-              </Badge>
-            ))}
+      <article>
+        <header className={styles.header}>
+          <Title1 as="h1">{article.title}</Title1>
+          <div className={styles.meta}>
+            {article.author && <Text size={300}>By {article.author}</Text>}
+            {article.date && <Text size={300}>• {article.date}</Text>}
           </div>
-        )}
-      </header>
+          {article.tags && article.tags.length > 0 && (
+            <div className={styles.tags}>
+              {article.tags.map((tag) => (
+                <Badge key={tag} appearance="tint" color="brand">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          )}
+        </header>
 
-      <section>
-        <Text as="p" block className={styles.content}>
-          {article.content || article.description}
-        </Text>
-      </section>
-    </article>
+        <section>
+          <Text as="p" block className={styles.content}>
+            {article.content || article.description}
+          </Text>
+        </section>
+      </article>
+    </div>
   );
 }
