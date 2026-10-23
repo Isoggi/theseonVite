@@ -43,11 +43,24 @@
   {
     "id": "5",
     "role": "Full-stack Developer",
+    "company": "Asuransi Astra",
+    "type": "Contract",
+    "duration": "Mar 2019 - May 2020 · 1 yr 3 mos",
+
+    "location": "South Jakarta, Jakarta, Indonesia",
+    "workModel": "On-site",
+
+    "description": "Working under XSIS on internal claim processing software, re-engineered to a fully web-based application.",
+    "skills": ["JavaScript", "ASP.NET Web API", "Microsoft SQL Server"]
+  },
+  {
+    "id": "6",
+    "role": "Full-stack Developer",
     "company": "PT Xsis Mitra Utama",
     "type": "Contract",
     "duration": "Dec 2017 - Sep 2020 · 2 yrs 10 mos",
     "location": "South Jakarta, Jakarta, Indonesia",
-    "workModel": "Hybrid",
+    "workModel": "On-site",
     "description": "Working with an internal team of XMU for Employee Self-service modules.",
     "skills": ["ASP.NET MVC", "ASP.NET Web API", "+10 skills"]
   }

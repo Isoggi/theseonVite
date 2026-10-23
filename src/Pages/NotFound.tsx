@@ -5,7 +5,7 @@ import {
   Title1,
   tokens,
 } from "@fluentui/react-components";
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({

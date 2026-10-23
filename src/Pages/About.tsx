@@ -1,5 +1,5 @@
 import { makeStyles, Text, Title1, Title2 } from "@fluentui/react-components";
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 
 const useStyles = makeStyles({
   page: {
@@ -30,8 +30,8 @@ export default function About() {
         </Text>
         <Text as="p" block>
           This site brings those different parts together in one place. Browse
-          the portfolio to explore featured work, visit the articles section
-          for notes and ideas, or return to the home page for an overview.
+          the portfolio to explore featured work, visit the articles section for
+          notes and ideas, or return to the home page for an overview.
         </Text>
       </section>
       <section aria-labelledby="about-purpose" className={styles.section}>

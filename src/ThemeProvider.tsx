@@ -5,7 +5,7 @@ import {
   webLightTheme,
 } from "@fluentui/react-components";
 import App from "./App";
-import { useTheme } from "./Hooks/useTheme";
+import { useTheme } from "./Hooks";
 
 function ThemeProvider() {
   const { themeMode, toggleTheme } = useTheme();

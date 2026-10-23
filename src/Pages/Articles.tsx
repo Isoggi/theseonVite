@@ -1,7 +1,7 @@
 import { makeStyles, Title1 } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import CardComponent from "../Components/Card.component";
-import { useDocumentMeta } from "../Hooks/useDocumentMetadata";
+import { useDocumentMeta } from "../Hooks";
 import { IArticle } from "../Interfaces";
 import { slugify } from "../Utils/slugify";
 import articlesData from "../assets/Data/Articles.json";
