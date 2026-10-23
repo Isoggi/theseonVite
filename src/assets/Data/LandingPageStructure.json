@@ -1,0 +1,17 @@
+[
+  {
+    "component": "landingheader",
+    "isactive": true,
+    "props": {}
+  },
+  {
+    "component": "landingcarousel",
+    "isactive": false,
+    "props": {}
+  },
+  {
+    "component": "landingexperience",
+    "isactive": true,
+    "props": {}
+  }
+]

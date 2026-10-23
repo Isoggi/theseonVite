@@ -3,7 +3,7 @@ import { ILandingCarouselSlide } from "../../Interfaces";
 import { CarouselItem } from "../../Types";
 import landingCarouselData from "../../assets/Data/LandingCarouselSlide.json";
 
-export function LandingCarousel(): React.JSX.Element {
+export default function LandingCarousel(): React.JSX.Element {
   const data = landingCarouselData as ILandingCarouselSlide[];
   const transformedData: CarouselItem[] = data.map((slide) => ({
     id: slide.id.toString(),
@@ -23,14 +23,6 @@ export function LandingCarousel(): React.JSX.Element {
       showControls={true}
       showIconControls={true}
       showControlsMeta={false}
-    >
-      {/* {data.map((slide) => (
-        <div key={slide.id}>
-          <img src={slide.image} alt={slide.title} />
-          <h2>{slide.title}</h2>
-          <p>{slide.description}</p>
-        </div>
-      ))} */}
-    </Carousel>
+    ></Carousel>
   );
 }
