@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "1",
+    "title": "The Complete ASP.Net Core 3.1 MVC With EF Core -Formerly 2.0",
+    "issuer": "Udemy",
+    "issueDate": "2023-10-06T00:00:00Z",
+    "credentialId": "UC-bfd333d5-53ab-494c-9cc5-51b75e5d8259",
+    "credentialUrl": "https://www.udemy.com/certificate/UC-bfd333d5-53ab-494c-9cc5-51b75e5d8259/",
+    "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-bfd333d5-53ab-494c-9cc5-51b75e5d8259.jpg?v=1696585288000",
+    "description": "This certificate above verifies that Kristanto Saptadi Nugraha successfully completed the course Master ASP.NET Core 8 MVC with EF Core:A Comprehensive Guide on 10/06/2023 as taught by Manzoor Ahmed on Udemy. The certificate indicates the entire course was completed as validated by the student. The course length represents the total hours of the videos and article lectures of the course at the time of most recent completion"
+  }
+]

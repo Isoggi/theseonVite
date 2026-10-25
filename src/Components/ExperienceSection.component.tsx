@@ -1,5 +1,6 @@
 import {
   Badge,
+  Button,
   Card,
   Caption1,
   makeStyles,
@@ -9,9 +10,11 @@ import {
 } from "@fluentui/react-components";
 import {
   CalendarRegular,
+  ChevronDownRegular,
   LocationRegular,
 } from "@fluentui/react-icons";
-import { IExperience } from "../Interfaces";
+import { ExperienceSectionProps } from "../Types";
+import * as React from "react";
 
 const useStyles = makeStyles({
   section: {
@@ -75,28 +78,41 @@ const useStyles = makeStyles({
     borderRadius: tokens.borderRadiusLarge,
     boxShadow: tokens.shadow4,
     minWidth: 0,
-    padding: tokens.spacingVerticalL,
+    padding: 0,
     transitionDuration: "160ms",
     transitionProperty: "box-shadow, transform",
-    "&:hover": {
+    "&:has(.experienceSummary:hover)": {
       boxShadow: tokens.shadow8,
-      transform: "translateY(-2px)",
     },
+  },
+  summary: {
+    alignItems: "center",
+    backgroundColor: "transparent",
+    borderRadius: tokens.borderRadiusLarge,
+    display: "flex",
+    gap: tokens.spacingHorizontalM,
+    justifyContent: "space-between",
+    minHeight: "76px",
+    padding: tokens.spacingVerticalL,
+    textAlign: "left",
+    width: "100%",
     "@media (max-width: 480px)": {
+      alignItems: "flex-start",
       padding: tokens.spacingVerticalM,
     },
   },
-  cardHeader: {
-    alignItems: "flex-start",
+  summaryContent: {
     display: "flex",
     flexWrap: "wrap",
-    gap: tokens.spacingHorizontalM,
-    justifyContent: "space-between",
+    gap: `${tokens.spacingVerticalXS} ${tokens.spacingHorizontalL}`,
+    minWidth: 0,
+    width: "100%",
   },
   titleGroup: {
     display: "flex",
     flexDirection: "column",
     gap: tokens.spacingVerticalXXS,
+    flex: "1 1 220px",
     minWidth: 0,
   },
   role: {
@@ -109,6 +125,28 @@ const useStyles = makeStyles({
   company: {
     color: tokens.colorNeutralForeground2,
     margin: 0,
+  },
+  duration: {
+    alignItems: "center",
+    color: tokens.colorNeutralForeground3,
+    display: "inline-flex",
+    flex: "0 1 auto",
+    gap: tokens.spacingHorizontalXS,
+  },
+  expandIcon: {
+    color: tokens.colorNeutralForeground2,
+    flexShrink: 0,
+    transition: "transform 160ms ease-in-out",
+  },
+  expandIconOpen: {
+    transform: "rotate(180deg)",
+  },
+  details: {
+    borderTop: `1px solid ${tokens.colorNeutralStroke2}`,
+    padding: `0 ${tokens.spacingVerticalL} ${tokens.spacingVerticalL}`,
+    "@media (max-width: 480px)": {
+      padding: `0 ${tokens.spacingVerticalM} ${tokens.spacingVerticalM}`,
+    },
   },
   metadata: {
     alignItems: "center",
@@ -137,12 +175,25 @@ const useStyles = makeStyles({
   },
 });
 
-const ExperienceSection = ({
-  experienceData,
-}: {
-  experienceData: IExperience[];
-}) => {
+const ExperienceSection = ({ isExpandable, data }: ExperienceSectionProps) => {
   const styles = useStyles();
+  const [expandedIds, setExpandedIds] = React.useState<Set<string>>(
+    () => new Set(),
+  );
+
+  const toggleExpanded = (id: string) => {
+    if (isExpandable) {
+      setExpandedIds((current) => {
+        const next = new Set(current);
+        if (next.has(id)) {
+          next.delete(id);
+        } else {
+          next.add(id);
+        }
+        return next;
+      });
+    }
+  };
 
   return (
     <section aria-labelledby="experience-heading" className={styles.section}>
@@ -152,60 +203,81 @@ const ExperienceSection = ({
         </Title2>
       </div>
       <ol className={styles.timeline}>
-        {experienceData.map((experience) => (
+        {data.map((experience) => (
           <li className={styles.timelineItem} key={experience.id}>
             <span aria-hidden="true" className={styles.marker} />
             <Card appearance="outline" className={styles.card}>
-              <div className={styles.cardHeader}>
-                <div className={styles.titleGroup}>
-                  <Text as="h3" className={styles.role}>
-                    {experience.role}
-                  </Text>
-                  <Text
-                    as="p"
-                    className={styles.company}
-                    weight="semibold"
-                  >
-                    {experience.company}
-                  </Text>
+              <Button
+                appearance="transparent"
+                className={`experienceSummary ${styles.summary}`}
+                aria-expanded={expandedIds.has(experience.id)}
+                aria-controls={`experience-details-${experience.id}`}
+                onClick={() => toggleExpanded(experience.id)}
+              >
+                <div className={styles.summaryContent}>
+                  <div className={styles.titleGroup}>
+                    <Text as="h3" className={styles.role}>
+                      {experience.role}
+                    </Text>
+                    <Text as="p" className={styles.company} weight="semibold">
+                      {experience.company}
+                    </Text>
+                  </div>
+                  <Caption1 className={styles.duration}>
+                    <CalendarRegular aria-hidden="true" />
+                    {experience.duration}
+                  </Caption1>
                 </div>
-                <Badge
-                  appearance="tint"
-                  color="brand"
-                  size="small"
-                  shape="rounded"
-                >
-                  {experience.type}
-                </Badge>
-              </div>
-
-              <div className={styles.metadata}>
-                <Caption1 className={styles.metadataItem}>
-                  <CalendarRegular aria-hidden="true" />
-                  {experience.duration}
-                </Caption1>
-                <Caption1 className={styles.metadataItem}>
-                  <LocationRegular aria-hidden="true" />
-                  {experience.location}
-                </Caption1>
-                {experience.workModel && (
-                  <Caption1>{experience.workModel}</Caption1>
+                {isExpandable && (
+                  <ChevronDownRegular
+                    aria-hidden="true"
+                    className={`${styles.expandIcon} ${
+                      expandedIds.has(experience.id)
+                        ? styles.expandIconOpen
+                        : ""
+                    }`}
+                  />
                 )}
-              </div>
+              </Button>
 
-              {experience.description && (
-                <Text as="p" className={styles.description}>
-                  {experience.description}
-                </Text>
-              )}
-
-              {experience.skills && experience.skills.length > 0 && (
-                <div aria-label="Skills" className={styles.skills}>
-                  {experience.skills.map((skill) => (
-                    <Badge appearance="outline" key={skill} size="small">
-                      {skill}
+              {expandedIds.has(experience.id) && (
+                <div
+                  className={styles.details}
+                  id={`experience-details-${experience.id}`}
+                >
+                  <div className={styles.metadata}>
+                    <Badge
+                      appearance="tint"
+                      color="brand"
+                      size="small"
+                      shape="rounded"
+                    >
+                      {experience.type}
                     </Badge>
-                  ))}
+                    <Caption1 className={styles.metadataItem}>
+                      <LocationRegular aria-hidden="true" />
+                      {experience.location}
+                    </Caption1>
+                    {experience.workModel && (
+                      <Caption1>{experience.workModel}</Caption1>
+                    )}
+                  </div>
+
+                  {experience.description && (
+                    <Text as="p" className={styles.description}>
+                      {experience.description}
+                    </Text>
+                  )}
+
+                  {experience.skills && experience.skills.length > 0 && (
+                    <div aria-label="Skills" className={styles.skills}>
+                      {experience.skills.map((skill) => (
+                        <Badge appearance="outline" key={skill} size="small">
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </Card>
