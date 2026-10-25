@@ -158,7 +158,7 @@ const useStyles = makeStyles({
   textWrapper: {
     color: tokens.colorNeutralForegroundOnBrand,
     opacity: 0,
-    left: "40px",
+    left: "6px",
     position: "absolute",
     top: 0,
     whiteSpace: "nowrap",

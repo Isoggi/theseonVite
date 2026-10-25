@@ -5,5 +5,5 @@ import { IExperience } from "../../Interfaces";
 
 export default function LandingExperience(): React.JSX.Element {
   const data = experienceData as IExperience[];
-  return <ExperienceSection experienceData={data} />;
+  return <ExperienceSection data={data} isExpandable={false} />;
 }

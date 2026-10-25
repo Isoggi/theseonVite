@@ -49,7 +49,7 @@ function getValidIndex(index: number, slideCount: number): number {
   return Math.min(Math.max(index, 0), Math.max(slideCount - 1, 0));
 }
 
-export function Carousel({
+export default function Carousel({
   children,
   items,
   initialIndex = 0,
@@ -242,5 +242,3 @@ export function Carousel({
     </section>
   );
 }
-
-export default Carousel;

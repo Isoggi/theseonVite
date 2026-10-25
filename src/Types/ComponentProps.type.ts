@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ICertificate } from "../Interfaces";
+import { ICertificate, IExperience } from "../Interfaces";
 
 export type CarouselItem = {
   /** Unique identifier for the slide */
@@ -41,6 +41,11 @@ export type AvatarComponentProps = {
 
 export type CertificateSectionProps = {
   certificates: ICertificate[];
+};
+
+export type ExperienceSectionProps = {
+  isExpandable?: boolean;
+  data: IExperience[];
 };
 
 export type CardProps = {
