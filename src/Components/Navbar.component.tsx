@@ -210,15 +210,12 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
     return () => observer.disconnect();
   }, []);
 
-  const themeIcon = (
-    <span className={styles.themeLabel}>
-      {themeMode === "dark" ? (
-        <WeatherMoonRegular aria-hidden="true" />
-      ) : (
-        <WeatherSunnyRegular aria-hidden="true" />
-      )}
-    </span>
-  );
+  const themeIcon =
+    themeMode === "dark" ? (
+      <WeatherMoonRegular aria-hidden="true" className={styles.themeLabel} />
+    ) : (
+      <WeatherSunnyRegular aria-hidden="true" className={styles.themeLabel} />
+    );
 
   const handleRouteClick = (
     event: React.MouseEvent<HTMLElement>,
