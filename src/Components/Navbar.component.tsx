@@ -3,7 +3,8 @@ import {
   makeStyles,
   mergeClasses,
   Subtitle1,
-  Switch,
+  Button,
+  Tooltip,
   tokens,
 } from "@fluentui/react-components";
 import {
@@ -123,12 +124,18 @@ const useStyles = makeStyles({
   },
   drawerThemeSwitch: {
     alignItems: "center",
-    backgroundColor: tokens.colorNeutralBackground2,
+    backgroundColor: tokens.colorBrandBackground,
     border: `1px solid ${tokens.colorNeutralStroke2}`,
     borderRadius: tokens.borderRadiusMedium,
     display: "flex",
     minHeight: "56px",
     padding: `0 ${tokens.spacingHorizontalM}`,
+    // "& > .themeLabel": {
+    //   backgroundColor: tokens.colorBrandBackground,
+    //   alignItems: "center",
+    //   columnGap: tokens.spacingHorizontalS,
+    //   display: "inline-flex",
+    // },
   },
   themeSwitch: {
     justifyContent: "space-between",
@@ -138,6 +145,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     columnGap: tokens.spacingHorizontalS,
     display: "inline-flex",
+    color: tokens.colorNeutralForegroundOnBrand,
   },
   drawerNav: {
     width: "100%",
@@ -202,14 +210,13 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
     return () => observer.disconnect();
   }, []);
 
-  const themeLabel = (
+  const themeIcon = (
     <span className={styles.themeLabel}>
       {themeMode === "dark" ? (
         <WeatherMoonRegular aria-hidden="true" />
       ) : (
         <WeatherSunnyRegular aria-hidden="true" />
       )}
-      {/* {themeMode === "dark" ? "Dark mode" : "Light mode"} */}
     </span>
   );
 
@@ -279,13 +286,16 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
             {item.label}
           </Link>
         ))}
-        <Switch
-          label={themeLabel}
-          labelPosition="before"
-          onClick={onThemeToggle}
-          checked={themeMode === "dark"}
-          aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
-        />
+        <Tooltip
+          content={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
+          relationship="label"
+        >
+          <Button
+            icon={themeIcon}
+            appearance="transparent"
+            onClick={onThemeToggle}
+          />
+        </Tooltip>
       </div>
       <div className={styles.mobileMenu}>
         <SearchBar onSearch={() => {}} startAsButton={true} />
@@ -304,14 +314,16 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
       >
         <NavDrawerBody className={styles.drawerBody}>
           <div className={styles.drawerThemeSwitch}>
-            <Switch
-              className={styles.themeSwitch}
-              label={themeLabel}
-              labelPosition="before"
-              onClick={onThemeToggle}
-              checked={themeMode === "dark"}
-              aria-label={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
-            />
+            <Tooltip
+              content={`Switch to ${themeMode === "dark" ? "light" : "dark"} mode`}
+              relationship="label"
+            >
+              <Button
+                icon={themeIcon}
+                appearance="transparent"
+                onClick={onThemeToggle}
+              />
+            </Tooltip>
           </div>
           <Nav
             aria-label="Mobile navigation"
