@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ICertificate, IExperience } from "../Interfaces";
+import { ICertificate, IExperience, IGitRepository } from "../Interfaces";
 
 export type CarouselItem = {
   /** Unique identifier for the slide */
@@ -41,6 +41,10 @@ export type AvatarComponentProps = {
 
 export type CertificateSectionProps = {
   certificates: ICertificate[];
+};
+
+export type GitRepositoryProps = {
+  repos: IGitRepository[];
 };
 
 export type ExperienceSectionProps = {

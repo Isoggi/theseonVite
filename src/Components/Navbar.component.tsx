@@ -182,7 +182,6 @@ const navigationItems = [
   { href: "/", label: "Home" },
   { href: "/articles", label: "Articles" },
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
 ];
 
 const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {

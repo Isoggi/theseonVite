@@ -5,6 +5,7 @@ import {
   Text,
   Title1,
   tokens,
+  // Persona,
 } from "@fluentui/react-components";
 import {
   Home24Regular,
@@ -50,6 +51,16 @@ export default function LandingHeader(): React.JSX.Element {
           ? data.description
           : "Welcome to my personal portfolio!"}
       </Text>
+      {/* <Persona
+        name={data.name}
+        secondaryText={data.description}
+        textPosition="after"
+        avatar={{
+          image: { src: data.avatar || "", alt: data.name },
+          size: AvatarSizes.landingpage,
+        }}
+        size="huge"
+      /> */}
       <AvatarComponent
         name={data.name}
         image={data.avatar}
