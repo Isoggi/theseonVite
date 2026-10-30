@@ -10,7 +10,7 @@ import { ArrowLeftRegular } from "@fluentui/react-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDocumentMeta } from "../../Hooks";
 import { IArticle } from "../../Interfaces";
-import articlesData from "../../assets/Data/Articles.json";
+import { ArticlesJson } from "../../assets/Data";
 
 const useStyles = makeStyles({
   page: {
@@ -54,7 +54,7 @@ export default function ArticleDetail() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string; title?: string }>();
 
-  const articles = articlesData as IArticle[];
+  const articles = ArticlesJson as IArticle[];
   const article = articles.find((a) => a.id === id);
 
   useDocumentMeta(

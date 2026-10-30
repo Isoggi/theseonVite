@@ -16,9 +16,12 @@ import {
 } from "@fluentui/react-nav";
 import { WeatherMoonRegular, WeatherSunnyRegular } from "@fluentui/react-icons";
 import { AppThemeProps } from "../Types";
+import { INavigationItem } from "../Interfaces";
 import * as React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchBar } from "./";
+import { theseOnLogo } from "../assets/Images";
+import { NavigationItemsJson } from "../assets/Data";
 
 const useStyles = makeStyles({
   navbar: {
@@ -113,6 +116,9 @@ const useStyles = makeStyles({
       display: "flex",
     },
   },
+  mobileMenuItem: {
+    color: tokens.colorNeutralForegroundOnBrand,
+  },
   drawer: {
     backgroundColor: tokens.colorNeutralBackground1,
   },
@@ -178,12 +184,6 @@ const useStyles = makeStyles({
   },
 });
 
-const navigationItems = [
-  { href: "/", label: "Home" },
-  { href: "/articles", label: "Articles" },
-  { href: "/portfolio", label: "Portfolio" },
-];
-
 const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
   const styles = useStyles();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
@@ -192,6 +192,7 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname.replace(/\/+$/, "") || "/";
+  const navigationItems = NavigationItemsJson as INavigationItem[];
 
   React.useEffect(() => {
     const searchSlot = searchSlotRef.current;
@@ -249,7 +250,7 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
       >
         <div className={`brandIcon ${styles.iconWrapper}`}>
           <img
-            src="/theseon.Logo.svg"
+            src={theseOnLogo}
             alt=""
             style={{
               width: 40,
@@ -294,8 +295,11 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
         </Tooltip>
       </div>
       <div className={styles.mobileMenu}>
-        <SearchBar onSearch={() => {}} startAsButton={true} />
+        <div className={styles.mobileMenuItem}>
+          <SearchBar onSearch={() => {}} startAsButton={true} />
+        </div>
         <Hamburger
+          className={styles.mobileMenuItem}
           aria-label="Open navigation menu"
           onClick={() => setIsDrawerOpen(true)}
         />
@@ -326,10 +330,10 @@ const Navbar = ({ themeMode, onThemeToggle }: AppThemeProps) => {
             className={styles.drawerNav}
             selectedValue={currentPath}
           >
-            {navigationItems.map((item) => (
+            {navigationItems.map((item, index) => (
               <NavItem
                 href={item.href}
-                key={item.href}
+                key={index}
                 onClick={(event) => handleRouteClick(event, item.href, true)}
                 value={item.href}
               >

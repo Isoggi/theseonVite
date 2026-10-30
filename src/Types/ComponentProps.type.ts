@@ -61,3 +61,10 @@ export type CardProps = {
   footer?: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
+
+export type SearchBarProps = {
+  onSearch: (query: string) => void;
+  startAsButton?: boolean;
+  placeholder?: string;
+  ariaLabel?: string;
+};

@@ -14,8 +14,9 @@ import {
 } from "@fluentui/react-icons";
 import { AvatarComponent } from "../../Components";
 import { IAvatarInfo } from "../../Interfaces";
-import AvatarInfo from "../../Assets/Data/LandingAvatar.json";
+import { LandingAvatarJson } from "../../assets/Data";
 import { AvatarSizes } from "../../Types";
+import { MyAvatar } from "../../assets/Images";
 
 const useStyles = makeStyles({
   introduction: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles({
 
 export default function LandingHeader(): React.JSX.Element {
   const styles = useStyles();
-  const data = AvatarInfo as IAvatarInfo;
+  const data = LandingAvatarJson as IAvatarInfo;
 
   return (
     <section aria-labelledby="home-title" className={styles.introduction}>
@@ -63,7 +64,7 @@ export default function LandingHeader(): React.JSX.Element {
       /> */}
       <AvatarComponent
         name={data.name}
-        image={data.avatar}
+        image={MyAvatar || data.avatar}
         size={AvatarSizes.landingpage}
       />
       <Title1 as="h1" id="home-title">

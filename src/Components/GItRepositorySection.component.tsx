@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-const GitRepositorySection = ({ repos }: GitRepositoryProps) => {
+export const GitRepositorySection = ({ repos }: GitRepositoryProps) => {
   const style = useStyles();
   return (
     <section aria-labelledby="repository-heading" className={style.section}>

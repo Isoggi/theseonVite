@@ -1,9 +1,7 @@
 import { useDocumentMeta } from "../Hooks";
-import { CertificateSection } from "../Components";
-import repositoryData from "../assets/Data/GitRepositories.json";
-import certificateData from "../assets/Data/Certificates.json";
+import { CertificateSection, GitRepositorySection } from "../Components";
+import { GitRepositoriesJson, CertificatesJson } from "../assets/Data";
 import { Divider, Title1 } from "@fluentui/react-components";
-import GitRepositorySection from "../Components/GItRepositorySection.component";
 
 export default function Portfolio() {
   useDocumentMeta("Portfolio | theseOn", {
@@ -14,9 +12,9 @@ export default function Portfolio() {
     <div>
       <Title1 as="h1">Portfolio</Title1>
       <Divider className="" />
-      <GitRepositorySection repos={repositoryData} />
+      <GitRepositorySection repos={GitRepositoriesJson} />
       <Divider className="" />
-      <CertificateSection certificates={certificateData} />
+      <CertificateSection certificates={CertificatesJson} />
     </div>
   );
 }

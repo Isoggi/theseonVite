@@ -6,3 +6,4 @@ export * from "./avatarinfo.interface";
 export * from "./pagestructure.interface";
 export * from "./brandtheme.interface";
 export * from "./gitrepository.interface";
+export * from "./navigationitem.interface";
