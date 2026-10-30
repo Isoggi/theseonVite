@@ -4,7 +4,7 @@ import CardComponent from "../Components/Card.component";
 import { useDocumentMeta } from "../Hooks";
 import { IArticle } from "../Interfaces";
 import { slugify } from "../Utils/slugify";
-import articlesData from "../assets/Data/Articles.json";
+import { ArticlesJson } from "../assets/Data";
 
 const useStyles = makeStyles({
   page: {
@@ -27,7 +27,7 @@ const Articles = () => {
   });
   const styles = useStyles();
   const navigate = useNavigate();
-  const articles = articlesData as IArticle[];
+  const articles = ArticlesJson as IArticle[];
 
   return (
     <div className={styles.page}>

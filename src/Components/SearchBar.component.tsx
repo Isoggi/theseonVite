@@ -6,13 +6,7 @@ import {
 } from "@fluentui/react-components";
 import { SearchRegular } from "@fluentui/react-icons";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-
-type SearchBarProps = {
-  onSearch: (query: string) => void;
-  startAsButton?: boolean;
-  placeholder?: string;
-  ariaLabel?: string;
-};
+import { SearchBarProps } from "../Types";
 
 const useStyles = makeStyles({
   form: {

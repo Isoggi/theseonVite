@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ICertificate, IExperience } from "../Interfaces";
+import { ICertificate, IExperience, IGitRepository } from "../Interfaces";
 
 export type CarouselItem = {
   /** Unique identifier for the slide */
@@ -43,6 +43,10 @@ export type CertificateSectionProps = {
   certificates: ICertificate[];
 };
 
+export type GitRepositoryProps = {
+  repos: IGitRepository[];
+};
+
 export type ExperienceSectionProps = {
   isExpandable?: boolean;
   data: IExperience[];
@@ -56,4 +60,11 @@ export type CardProps = {
   /** Custom footer content; pass null to hide the footer. */
   footer?: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+};
+
+export type SearchBarProps = {
+  onSearch: (query: string) => void;
+  startAsButton?: boolean;
+  placeholder?: string;
+  ariaLabel?: string;
 };

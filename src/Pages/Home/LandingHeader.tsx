@@ -5,6 +5,7 @@ import {
   Text,
   Title1,
   tokens,
+  // Persona,
 } from "@fluentui/react-components";
 import {
   Home24Regular,
@@ -13,8 +14,9 @@ import {
 } from "@fluentui/react-icons";
 import { AvatarComponent } from "../../Components";
 import { IAvatarInfo } from "../../Interfaces";
-import AvatarInfo from "../../Assets/Data/LandingAvatar.json";
+import { LandingAvatarJson } from "../../assets/Data";
 import { AvatarSizes } from "../../Types";
+import { MyAvatar } from "../../assets/Images";
 
 const useStyles = makeStyles({
   introduction: {
@@ -41,7 +43,7 @@ const useStyles = makeStyles({
 
 export default function LandingHeader(): React.JSX.Element {
   const styles = useStyles();
-  const data = AvatarInfo as IAvatarInfo;
+  const data = LandingAvatarJson as IAvatarInfo;
 
   return (
     <section aria-labelledby="home-title" className={styles.introduction}>
@@ -50,9 +52,19 @@ export default function LandingHeader(): React.JSX.Element {
           ? data.description
           : "Welcome to my personal portfolio!"}
       </Text>
+      {/* <Persona
+        name={data.name}
+        secondaryText={data.description}
+        textPosition="after"
+        avatar={{
+          image: { src: data.avatar || "", alt: data.name },
+          size: AvatarSizes.landingpage,
+        }}
+        size="huge"
+      /> */}
       <AvatarComponent
         name={data.name}
-        image={data.avatar}
+        image={MyAvatar || data.avatar}
         size={AvatarSizes.landingpage}
       />
       <Title1 as="h1" id="home-title">

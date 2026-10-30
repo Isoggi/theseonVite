@@ -2,9 +2,16 @@ import { Link, makeStyles, tokens } from "@fluentui/react-components";
 import { Mail24Regular } from "@fluentui/react-icons";
 import { useNavigate } from "react-router-dom";
 import { AppThemeProps } from "../Types";
-import LandingAvatar from "../Assets/Data/LandingAvatar.json";
-import { IAvatarInfo } from "../Interfaces/avatarinfo.interface";
-
+import { LandingAvatarJson } from "../assets/Data";
+import { IAvatarInfo } from "../Interfaces";
+import {
+  GitHubBlack,
+  GitHubWhite,
+  LinkedInBlack,
+  LinkedInWhite,
+  ReactLogo,
+  ViteLogo,
+} from "../assets/Images";
 const useStyles = makeStyles({
   footer: {
     alignItems: "center",
@@ -32,10 +39,29 @@ const Footer = ({ themeMode }: AppThemeProps) => {
       event.preventDefault();
       navigate(href);
     };
-  const data = LandingAvatar as IAvatarInfo;
+  const data = LandingAvatarJson as IAvatarInfo;
   return (
     <footer className={styles.footer}>
-      <span>© {new Date().getFullYear()} theseOn</span>
+      <span>
+        © {new Date().getFullYear()} theseOn - Built with{" "}
+        {
+          <img
+            src={ReactLogo}
+            alt="React"
+            style={{ width: "12px", height: "12px" }}
+            aria-label="React"
+          />
+        }{" "}
+        +{" "}
+        {
+          <img
+            src={ViteLogo}
+            alt="Vite"
+            style={{ width: "12px", height: "12px" }}
+            aria-label="Vite"
+          />
+        }
+      </span>
       <nav className={styles.links} aria-label="Footer navigation">
         <Link href="/about" onClick={navigateTo("/about")}>
           About
@@ -58,9 +84,7 @@ const Footer = ({ themeMode }: AppThemeProps) => {
               rel="noopener noreferrer"
             >
               <img
-                src={
-                  themeMode === "dark" ? "/InBug-White.png" : "/InBug-Black.png"
-                }
+                src={themeMode === "dark" ? LinkedInWhite : LinkedInBlack}
                 alt="LinkedIn"
                 style={{ width: "24px", height: "24px" }}
               />
@@ -73,11 +97,7 @@ const Footer = ({ themeMode }: AppThemeProps) => {
               rel="noopener noreferrer"
             >
               <img
-                src={
-                  themeMode === "dark"
-                    ? "/GitHub_Invertocat_White.svg"
-                    : "/GitHub_Invertocat_Black.svg"
-                }
+                src={themeMode === "dark" ? GitHubWhite : GitHubBlack}
                 alt="GitHub"
                 style={{ width: "24px", height: "24px" }}
               />

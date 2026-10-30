@@ -3,8 +3,8 @@ import { useDocumentMeta } from "../Hooks";
 // import LandingHeader from "./Home/LandingHeader";
 // import LandingCarousel from "./Home/LandingCarousel";
 import { getPageModules } from "../Utils/getPageModules";
-import LandingPageStructure from "../assets/Data/LandingPageStructure.json";
-import { IPageStructure } from "../Interfaces/";
+import { LandingPageStructureJson } from "../assets/Data";
+import { IPageStructure } from "../Interfaces";
 
 export default function Home() {
   useDocumentMeta("theseOn | Personal portfolio", {
@@ -12,7 +12,7 @@ export default function Home() {
       "Explore theseOn, the personal portfolio of a web developer, featuring professional experience, selected projects, and articles.",
   });
 
-  const pageStructure = LandingPageStructure as IPageStructure[];
+  const pageStructure = LandingPageStructureJson as IPageStructure[];
   const renderedSections = getPageModules("Home", pageStructure);
   return (
     <div>

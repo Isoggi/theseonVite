@@ -1,10 +1,10 @@
 import { Carousel } from "../../Components";
 import { ILandingCarouselSlide } from "../../Interfaces";
 import { CarouselItem } from "../../Types";
-import landingCarouselData from "../../assets/Data/LandingCarouselSlide.json";
+import { LandingCarouselSlide } from "../../assets/Data";
 
 export default function LandingCarousel(): React.JSX.Element {
-  const data = landingCarouselData as ILandingCarouselSlide[];
+  const data = LandingCarouselSlide as ILandingCarouselSlide[];
   const transformedData: CarouselItem[] = data.map((slide) => ({
     id: slide.id.toString(),
     title: slide.title,

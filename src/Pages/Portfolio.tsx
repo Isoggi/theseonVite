@@ -1,12 +1,9 @@
 import { useDocumentMeta } from "../Hooks";
-import { CertificateSection } from "../Components";
-import { ICertificate } from "../Interfaces";
-import certificateData from "../assets/Data/Certificates.json";
-import { Text, Title1 } from "@fluentui/react-components";
+import { CertificateSection, GitRepositorySection } from "../Components";
+import { GitRepositoriesJson, CertificatesJson } from "../assets/Data";
+import { Divider, Title1 } from "@fluentui/react-components";
 
-type Props = { urls?: string[] };
-
-export default function Portfolio({ urls }: Props) {
+export default function Portfolio() {
   useDocumentMeta("Portfolio | theseOn", {
     description:
       "Explore selected web development projects and professional work featured in the theseOn portfolio.",
@@ -14,14 +11,10 @@ export default function Portfolio({ urls }: Props) {
   return (
     <div>
       <Title1 as="h1">Portfolio</Title1>
-      <div>
-        {urls?.map((url) => (
-          <Text as="p" key={url}>
-            {url}
-          </Text>
-        ))}
-      </div>
-      <CertificateSection certificates={certificateData as ICertificate[]} />
+      <Divider className="" />
+      <GitRepositorySection repos={GitRepositoriesJson} />
+      <Divider className="" />
+      <CertificateSection certificates={CertificatesJson} />
     </div>
   );
 }

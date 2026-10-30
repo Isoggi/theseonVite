@@ -1,0 +1,5 @@
+[
+  { "href": "/", "label": "Home" },
+  { "href": "/articles", "label": "Articles" },
+  { "href": "/portfolio", "label": "Portfolio" }
+]

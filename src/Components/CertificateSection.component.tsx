@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     color: tokens.colorNeutralForeground2,
     display: "flex",
     flexDirection: "column",
-    gap: tokens.spacingVerticalXS,
+    gap: tokens.spacingVerticalXS && tokens.spacingHorizontalXS,
   },
 });
 
@@ -53,7 +53,17 @@ export default function CertificateSection({
               body={
                 <div className={styles.cardBody}>
                   {certificate.issueDate && (
-                    <Text size={300}>Issued {certificate.issueDate}</Text>
+                    <Text size={300}>
+                      Issued{" "}
+                      {new Date(certificate.issueDate).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          year: "numeric",
+                          timeZone: "UTC",
+                        },
+                      )}
+                    </Text>
                   )}
                   {certificate.credentialId && (
                     <Text size={300}>

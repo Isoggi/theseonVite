@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "theseOnVite",
+    "url": "https://github.com/Isoggi/theseonVite",
+    "description": "A personal portfolio and writing site built with React, TypeScript, Vite, and Fluent UI v9. ",
+    "stack": ["TypeScript", "React", "HTML"]
+  },
+  {
+    "id": 2,
+    "title": "theseOn.PDF",
+    "url": "https://github.com/Isoggi/theseOn.PDF",
+    "description": "An ASP.NET Core Web API that generates A4 PDF documents from an HTML fragment or a rendered web page using PuppeteerSharp and headless Chromium. ",
+    "stack": ["C#", ".NET 8", "Web API"]
+  }
+]
