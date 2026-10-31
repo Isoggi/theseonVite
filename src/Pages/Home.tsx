@@ -1,25 +1,23 @@
 import { useDocumentMeta } from "../Hooks";
-// import LandingExperience from "./Home/LandingExperience";
-// import LandingHeader from "./Home/LandingHeader";
+import LandingExperience from "./Home/LandingExperience";
+import LandingHeader from "./Home/LandingHeader";
 // import LandingCarousel from "./Home/LandingCarousel";
-import { getPageModules } from "../Utils/getPageModules";
-import { LandingPageStructureJson } from "../assets/Data";
-import { IPageStructure } from "../Interfaces";
+// import { LandingPageStructureJson } from "../assets/Data";
+// import { IPageStructure } from "../Interfaces";
 
 export default function Home() {
   useDocumentMeta("theseOn | Personal portfolio", {
     description:
-      "Explore theseOn, the personal portfolio of a web developer, featuring professional experience, selected projects, and articles.",
+      "theseOn, personal portfolio of Kristanto Saptadi Nugraha, Full-Stack Developer, NET, C#, and React.",
   });
 
-  const pageStructure = LandingPageStructureJson as IPageStructure[];
-  const renderedSections = getPageModules("Home", pageStructure);
+  // const pageStructure = LandingPageStructureJson as IPageStructure[];
+
   return (
     <div>
-      {/* <LandingHeader />
-      <LandingCarousel />
-      <LandingExperience /> */}
-      {renderedSections}
+      <LandingHeader />
+      {/* <LandingCarousel /> */}
+      <LandingExperience />
     </div>
   );
 }

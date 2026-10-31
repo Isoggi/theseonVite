@@ -11,7 +11,6 @@ export default function Portfolio() {
   return (
     <div>
       <Title1 as="h1">Portfolio</Title1>
-      <Divider className="" />
       <GitRepositorySection repos={GitRepositoriesJson} />
       <Divider className="" />
       <CertificateSection certificates={CertificatesJson} />
