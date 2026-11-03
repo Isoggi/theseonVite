@@ -19,11 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-
-    /* Path Reference */
-    // "paths": {
-    //   "@/*": ["./src/*"]
-    // }
   },
   "include": ["src"]
 }

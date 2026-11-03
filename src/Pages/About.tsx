@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 export default function About() {
   useDocumentMeta("About | theseOn", {
     description:
-      "Learn about theseOn, a personal portfolio and writing space sharing professional experience, selected projects, and technology articles.",
+      "A personal portfolio and writing space sharing professional experience, selected projects, and technology articles.",
   });
   const styles = useStyles();
 
