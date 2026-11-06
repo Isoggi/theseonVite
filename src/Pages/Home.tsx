@@ -6,7 +6,7 @@ import LandingHeader from "./Home/LandingHeader";
 // import { IPageStructure } from "../Interfaces";
 
 export default function Home() {
-  useDocumentMeta("theseOn | Personal portfolio", {
+  useDocumentMeta("theseOn | Kristanto Nugraha", {
     description:
       "theseOn, personal portfolio of Kristanto Saptadi Nugraha, Full-Stack Developer, NET, C#, and React.",
   });
