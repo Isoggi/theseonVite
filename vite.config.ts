@@ -27,13 +27,22 @@ export default defineConfig(({ mode }) => {
             return html.replace("<!-- IsProd -->", "");
           }
 
-          const baseUrl = "https://cdnjs.cloudflare.com/ajax/libs/";
-          const cdnScripts = `<script crossorigin="anonymous" src="${baseUrl}react/${reactV}/cjs/react.production.min.js"></script><script crossorigin="anonymous" src="${baseUrl}react-dom/${reactDomV}/cjs/react-dom.production.min.js"></script>`;
-          return html.replace("<!-- IsProd -->", cdnScripts);
+          const importMap = {
+            imports: {
+              react: `https://esm.sh/react@${reactV}`,
+              "react/": `https://esm.sh/react@${reactV}/`,
+              "react-dom": `https://esm.sh/react-dom@${reactDomV}?external=react`,
+              "react-dom/client": `https://esm.sh/react-dom@${reactDomV}/client?external=react`,
+            },
+          };
+          return html.replace(
+            "<!-- IsProd -->",
+            `<script type="importmap">${JSON.stringify(importMap)}</script>`,
+          );
         },
       },
       sitemap({
-        hostname: "https://theseon.my.id", // Replace with your production domain
+        hostname: "https://theseon.my.id",
         dynamicRoutes: [
           "/",
           "/about",
@@ -53,47 +62,19 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: ["react", "react-dom"],
+        external: (id) => /^react(?:-dom)?(?:\/|$)/.test(id),
         output: {
-          globals: {
-            react: "React",
-            "react/jsx-runtime": "React",
-            "react-dom": "ReactDOM",
-            "react-dom/client": "ReactDOM",
-          },
           manualChunks(id) {
-            // Put node_modules dependencies into separate vendor chunks
             if (id.includes("node_modules") || id.includes(".pnpm")) {
-              // if (/node_modules\/(react-router-dom)\//.test(id)) {
               if (id.includes("react-router")) {
-                console.log(
-                  id
-                    .replace(/^.+node_modules/, "react:")
-                    .replace("node_modules/", ""),
-                );
                 return "vendor-react-router";
               }
               if (id.includes("griffel")) {
-                console.log(
-                  id
-                    .replace(/^.+node_modules/, "griffel:")
-                    .replace("node_modules/", ""),
-                );
                 return "vendor-griffel";
               }
               if (id.includes("fluentui")) {
-                console.log(
-                  id
-                    .replace(/^.+node_modules/, "fluentui:")
-                    .replace("node_modules/", ""),
-                );
                 return "vendor-fluentui";
               }
-              console.log(
-                id
-                  .replace(/^.+node_modules/, "vendor:")
-                  .replace("node_modules/", ""),
-              );
               return "vendor";
             }
           },
