@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     gap: tokens.spacingVerticalXS && tokens.spacingHorizontalXS,
+    padding: tokens.spacingVerticalM && tokens.spacingHorizontalM,
   },
 });
 
@@ -48,23 +49,22 @@ export default function CertificateSection({
             <CardComponent
               key={certificate.id}
               title={certificate.title}
-              description={certificate.issuer}
+              description={`${certificate.issuer} ${
+                certificate.issueDate
+                  ? " | Issued " +
+                    new Date(certificate.issueDate).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "short",
+                        year: "numeric",
+                        timeZone: "UTC",
+                      },
+                    )
+                  : ""
+              }`}
               image={certificate.image}
               body={
                 <div className={styles.cardBody}>
-                  {certificate.issueDate && (
-                    <Text size={300}>
-                      Issued{" "}
-                      {new Date(certificate.issueDate).toLocaleDateString(
-                        "en-US",
-                        {
-                          month: "short",
-                          year: "numeric",
-                          timeZone: "UTC",
-                        },
-                      )}
-                    </Text>
-                  )}
                   {certificate.credentialId && (
                     <Text size={300}>
                       Credential ID: {certificate.credentialId}
